@@ -1,0 +1,29 @@
+I'm gonna give you guys a reference file to help with git stuff.
+Feel free to add to this file if you find something you think is helpful
+for the group.
+
+1. Starting your branch off master (run these commands to get your branch ready)
+	a. git checkout -b master-<yourname>
+	b. git push
+	c. (copy paste the command that is generated after trying to push to add the branch to the github repository)
+
+2. Rebasing your branch on master
+	a. From master branch use the command: git pull
+	b. After master is up to date: git checkout <yourbranch>
+	c. From the branch you want to rebase: git rebase master
+	d. If you have any merge conflicts you will update them here and then type the command: git rebase --continue
+	e. Keep rebasing until finished
+	f. You can now safely push to your branch on the github repo
+	g. Create a new pull request onto master and have someone review the pull request before merging if possible
+
+3. cherry-pick a commit (a bit more complicated and maybe not necessary for our project, but it is really helpful when needing to grab a specific commit from someone else's branch)
+	a. on github find the commit you are wanting to grab for your branch
+	b. Copy and paste the commit hash located on the right hand side of the commit
+	c. From your local repo type the command: git cherry-pick <commit hash>
+	d. Depending on how up to date you are with the persons branch, you may need to do git cherry-pick --continue
+
+4. Setting up another remote repository (Only necessary if we decide to use bit bucket as far as I know.  This is helpful if you want to pull from someone elses branch, but don't want to pull all of their branches to your repo)
+	a. git remote add <remote-name> <remote-url>
+	b. To stay up to date with this remote type the command: git fetch <remote-name>
+	c. To push to this remote type the command: git push <remote-name>
+	d. If you want to pull from that remote you would type the command: git pull <remote-name> <branch-name>
