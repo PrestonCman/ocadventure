@@ -1,3 +1,4 @@
 Test
 I want to test git!
+
 This is my favorite text file
