@@ -27,3 +27,6 @@ for the group.
 	b. To stay up to date with this remote type the command: git fetch <remote-name>
 	c. To push to this remote type the command: git push <remote-name>
 	d. If you want to pull from that remote you would type the command: git pull <remote-name> <branch-name>
+
+5. Visual Studio Code will work out of the box if you set up your repo correct in the command line.
+	a. I suggest you set up your local repository using the normal command line, and then you should be able to go into that project like normal and the source control options will be eneabled.
