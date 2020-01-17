@@ -30,3 +30,10 @@ for the group.
 
 5. Visual Studio Code will work out of the box if you set up your repo correct in the command line.
 	a. I suggest you set up your local repository using the normal command line, and then you should be able to go into that project like normal and the source control options will be eneabled.
+
+6. Stashing your work (Useful if you are ready to commit, but forgot you needed to rebase off master)
+	a. Stashing changes will result in a clean directory and will make pulling or rebasing easier
+	b. To stash changes type the command: git stash
+	c. You now have your changes in your stash, to view your stash use the command: git stash list
+	d. To pop off of your stash stack, type the command: git stash pop <index of stashed change>
+	e. The changes should be back in your working directory and ready to be added to the commit
