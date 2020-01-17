@@ -37,3 +37,7 @@ for the group.
 	c. You now have your changes in your stash, to view your stash use the command: git stash list
 	d. To pop off of your stash stack, type the command: git stash pop <index of stashed change>
 	e. The changes should be back in your working directory and ready to be added to the commit
+
+7. .gitignore (this will cause git to ignore whatever is in the file e.g. our env directory)
+	a. If you have a file in your directory, such as your env, you do not want git to see changes in there as changes to the repo
+	b. Simply add the file name or directory name/path to the git ingore and git will literally ignore those files or directories
