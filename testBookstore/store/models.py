@@ -21,9 +21,10 @@ class Book(models.Model):
     ready_for_sale = models.BooleanField()
     # should we have multiple places for publisher and author since we might have more than one publisher and author.
     publisher = models.CharField(max_length=100)
-    author = models.CharField(max_length=300)
-
-
+    primary_author = models.CharField(max_length=300)
+    other_authors = models.CharField(max_length=100,null=True)
+    def __str__(self):
+       return self.title
    
 
     
