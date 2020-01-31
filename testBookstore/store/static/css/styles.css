@@ -1,0 +1,30 @@
+.home {
+    padding: 160px;
+    text-align: center
+}
+
+.home_btn {
+    text-align: left;
+    padding: 5px;
+    background-color: orange;
+}
+
+.header {
+    padding: 5px;
+    background-color: blue;
+}
+
+.D2D {
+    color: orange;
+    text-align: center;
+}
+
+.search_bar {
+    color: orange;
+    text-align: right;
+}
+
+.search {
+    padding: 80;
+    text-align: center;
+}
