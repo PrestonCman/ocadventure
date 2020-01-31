@@ -3,14 +3,12 @@ from django.db import models
 # Create your models here.
 # Create your models here.
 from django.db import models
-import uuid
-from django.contrib.postgres.fields import ArrayField
+
 
 
 #Here is the model I created for books.
 class Book(models.Model):
-    def __str__(self):
-        return self
+   
     
     isbn_13 = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
@@ -22,8 +20,8 @@ class Book(models.Model):
     volume = models.CharField(max_length=100,null=True)
     ready_for_sale = models.BooleanField()
     # should we have multiple places for publisher and author since we might have more than one publisher and author.
-    publisher = ArrayField(models.CharField(max_length=100))
-    author = ArrayField(models.CharField(max_length=300))
+    publisher = models.CharField(max_length=100)
+    author = models.CharField(max_length=300)
 
 
    
