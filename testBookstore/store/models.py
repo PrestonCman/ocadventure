@@ -15,14 +15,14 @@ class Book(models.Model):
     genre = models.CharField(max_length=100)
     description = models.CharField(max_length=700)
     title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=200, null=True)
-    series = models.CharField(max_length=100,null=True)
-    volume = models.CharField(max_length=100,null=True)
+    subtitle = models.CharField(max_length=200, null=True, blank = True)
+    series = models.CharField(max_length=100,null=True, blank = True)
+    volume = models.CharField(max_length=100,null=True, blank = True)
     ready_for_sale = models.BooleanField()
     # should we have multiple places for publisher and author since we might have more than one publisher and author.
     publisher = models.CharField(max_length=100)
     primary_author = models.CharField(max_length=300)
-    other_authors = models.CharField(max_length=100,null=True)
+    other_authors = models.CharField(max_length=100,null=True, blank = True)
     def __str__(self):
        return self.title
    
