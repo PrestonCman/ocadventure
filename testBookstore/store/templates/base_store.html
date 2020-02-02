@@ -5,10 +5,10 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <div class="header">
-    <form action="{% url 'search' %}">
+    <form action="{% url 'search' %}" method="GET">
       <h3 class="D2D">Draft 2 Digital</h3>
       <div class="search_bar">
-        <input type="search" placeholder="Enter title, author, isbn...">
+        <input name="q" type="text" placeholder="Enter title, author, isbn...">
         <input type="submit" value="Search Book">
       </div>
     </form>

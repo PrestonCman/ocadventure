@@ -3,8 +3,8 @@
 {% block content %}
 <div class="home">
       <h1>Welcome to the Draft 2 Digital Test Bookstore!</h1>
-      <form action="{% url 'search' %}">
-          <input type="search" placeholder="Enter title, author, isbn...">
+      <form action="{% url 'search' %}" method="GET">
+          <input name="q" type="text" placeholder="Enter title, author, isbn...">
           <input type="submit" value="Search Book">
       </form>
 </div>
