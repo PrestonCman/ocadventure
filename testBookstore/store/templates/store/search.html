@@ -2,6 +2,73 @@
 
 {% block content %}
 <div class="search">
-    <h1>Welcome to the Search page!</h1>
+
+  <h1>Result for: {{query}}</h1>
+
+  {% if book_list %}
+  <ul>
+    {% for book in book_list %}
+      <li>
+        <p>Title: {{book.title}}</p>
+        <p>Author: {{book.primary_author}}</p>
+        <p>Genre: {{book.genre}}</p>
+        <p>ISBN: {{book.isbn_13}}</p>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the Store.</p>
+  {% endif %}
+
+<style>
+ul2{
+    text-align: left;
+}
+
+.sidenav {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 200px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+</style>
+{% block sidebar %}
+<div class="sidenav">
+    <ul2>
+      <li>Sort by...</li>
+      <li>Title</a></li>
+      <li>Author</a></li>
+      <li>Publisher</a></li>
+      <li>Price</a></li>
+      <li>Series</a></li>
+    
+   </ul2>
 </div>
+{% endblock %}
+
+
+{% block pagination %}
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+{% endblock %}
+</div>
+
 {% endblock %}
