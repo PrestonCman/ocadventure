@@ -18,3 +18,8 @@ class search(ListView):
                                           Q(other_authors__icontains=query) | Q(isbn_13__icontains=query))
         print(object_list)      #remove this later when html list display is added.  
         return object_list
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data()
+        data['query'] = self.request.GET.get('q')
+        return data
