@@ -1,0 +1,24 @@
+{% extends "base_store.html" %}
+
+{% block content %}
+<h1>{{book.title}}</h1>
+{% if book.volume %}
+    <h4>Volume {{book.volume}}</h4>
+{% endif %}
+{% if book.series %}
+    <h4>Series: {{book.series}}</h4>
+{% endif %}
+{% if book.other_authors %}
+    <h4>By: {{book.primary_author}}, {{book.other_authors}},    ISBN: {{book.isbn_13}},    {{book.genre}}</h4>
+{% else %}
+    <h4>By: {{book.primary_author}}, ISBN: {{book.isbn_13}},    {{book.genre}}</h4>
+{% endif %}
+<h4>Price: {{book.price}}</h4>
+<h4>Description: {{book.description}}</h4>
+<h4>Publisher: {{book.publisher}}</h4>
+{% if book.ready_for_sale %}
+    <h4>This book is ready for sale!</h4>
+{% else %}
+    <h4>This book not currently for sale</h4>
+{% endif %}
+{% endblock %}
