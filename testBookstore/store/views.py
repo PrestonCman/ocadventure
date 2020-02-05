@@ -1,10 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from .models import Book
 from django.db.models import Q
 
 def home(request):
     return render(request, 'store/home.html')
+
+def bookDetail(request, book_id):
+    context = {
+        'book' : get_object_or_404(Book, pk = book_id)
+    }
+    return render(request, 'store/bookDetail.html', context)
 
 class search(ListView):
     model = Book
@@ -18,3 +24,8 @@ class search(ListView):
                                           Q(other_authors__icontains=query) | Q(isbn_13__icontains=query))
         print(object_list)      #remove this later when html list display is added.  
         return object_list
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data()
+        data['query'] = self.request.GET.get('q')
+        return data
