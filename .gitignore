@@ -1,5 +1,4 @@
 # This is to keep git from recognizing certain files or directories
 env
 __pycache__
-migrations
 .vscode

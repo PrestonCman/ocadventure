@@ -3,7 +3,9 @@ from django.db import models
 # Create your models here.
 # Create your models here.
 from django.db import models
+from pygments.lexers import get_all_lexers
 
+LEXERS = [item for item in get_all_lexers() if item[1]]
 
 
 #Here is the model I created for books.
@@ -23,6 +25,11 @@ class Book(models.Model):
     publisher = models.CharField(max_length=100)
     primary_author = models.CharField(max_length=300)
     other_authors = models.CharField(max_length=100,null=True, blank = True)
+   
+    linenos = models.BooleanField(default=False)
+    class Meta:
+        ordering = ['title']
+    
     def __str__(self):
        return self.title
    

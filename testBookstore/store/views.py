@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from .models import Book
 from django.db.models import Q
+from .serializers import BookSerializer
+from rest_framework import generics
 
 def home(request):
     return render(request, 'store/home.html')
@@ -29,3 +31,11 @@ class search(ListView):
         data = super().get_context_data()
         data['query'] = self.request.GET.get('q')
         return data
+
+class BookList(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
