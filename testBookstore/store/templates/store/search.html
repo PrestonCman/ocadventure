@@ -3,26 +3,47 @@
 {% block content %}
 <div class="search">
 
-  <h1>Result for: {{query}}</h1>
+  <h1>Result for :</h1>{{query}}
 
   {% if book_list %}
+  
   <ul>
     {% for book in book_list %}
-      <li>
-        <p>Title: <a href="{% url 'detail' book.id %}">{{book.title}}</a></p>
-        <p>Author: {{book.primary_author}}</p>
-        <p>Genre: {{book.genre}}</p>
-        <p>ISBN: {{book.isbn_13}}</p>
-      </li>
+      <li1>
+        <h3>Title: {{book.title}}</h3>
+        <p>
+        Author: {{book.primary_author}},
+        Genre: {{book.genre}},
+        ISBN: {{book.isbn_13}}
+      </li1>
     {% endfor %}
   </ul>
+
   {% else %}
     <p>There are no books in the Store.</p>
   {% endif %}
 
 <style>
+  * {
+  box-sizing: border-box;
+}
 ul2{
     text-align: left;
+    
+}
+li1{
+  text-align: left;
+}
+ul{
+  width: 1000px;
+  display:inline-block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
 }
 
 .sidenav {
@@ -40,7 +61,7 @@ ul2{
 {% block sidebar %}
 <div class="sidenav">
     <ul2>
-      <li>Sort by...</li>
+      <l1>Sort by...</l1>
       <li>Title</a></li>
       <li>Author</a></li>
       <li>Publisher</a></li>
