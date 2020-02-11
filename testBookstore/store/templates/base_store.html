@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <div class="header">
+    <form action="{% url 'home' %}" method="GET">
+      <input class="home_btn" type="submit" value="Home" formaction="{% url 'home' %}">
+    </form>
     <form action="{% url 'search' %}" method="GET">
       <h3 class="D2D">Draft 2 Digital</h3>
       <div class="search_bar">
