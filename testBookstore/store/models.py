@@ -26,6 +26,7 @@ class Book(models.Model):
     primary_author = models.CharField(max_length=300)
     other_authors = models.CharField(max_length=100,null=True, blank = True)
    
+    file_path = models.CharField(max_length=256)
     linenos = models.BooleanField(default=False)
     class Meta:
         ordering = ['title']

@@ -4,6 +4,10 @@ from .models import Book
 from django.db.models import Q
 from .serializers import BookSerializer
 from rest_framework import generics
+from rest_framework.decorators import api_view
+from django.http import HttpResponse
+
+onix_file = ""
 
 def home(request):
     return render(request, 'store/home.html')
@@ -32,10 +36,22 @@ class search(ListView):
         data['query'] = self.request.GET.get('q')
         return data
 
-class BookList(generics.ListCreateAPIView):
-    queryset = Book.objects.all()
+class ProcessBook(generics.GenericAPIView):
     serializer_class = BookSerializer
 
-class BookDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Book.objects.all()
+    def get(self, request): 
+        # print(request["filepath"])
+        # onix_file = open(request["filepath"])
+        onix_file = open("/Users/preston/Documents/Programs/teamproject/testBookstore/store/idiot.txt")
+        return HttpResponse(onix_file.name)
+        
+    # post isn't working yet
+    def post(self, request):
+        print("POST!\n\n\n")
+        return HttpResponse(request)
+
+class IngestBook(generics.GenericAPIView):
     serializer_class = BookSerializer
+    
+    def post (self, request):
+        onix_file = open(request)
