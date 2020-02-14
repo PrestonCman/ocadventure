@@ -5,11 +5,15 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <div class="header">
+    <form action="{% url 'home' %}" method="GET">
+      <input class="home_btn" type="image" src="{% static 'images/home-button.png' %}" alt="Home">
+    </form>
+    {% load static %}
+    <img class="D2D" src="{% static 'images/d2d-logo-BlueBG.png'%}" alt="Draft 2 Digital">
     <form action="{% url 'search' %}" method="GET">
-      <h3 class="D2D">Draft 2 Digital</h3>
       <div class="search_bar">
-        <input name="q" type="text" placeholder="Enter title, author, isbn...">
-        <input type="submit" value="Search Book">
+        <input id="search_button" type="image" src="{% static 'images/search-icon.png' %}" alt="Search">
+        <input id="user_search" name="q" type="text" placeholder="Enter title, author, isbn...">
       </div>
     </form>
 </div> 
