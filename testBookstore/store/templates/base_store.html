@@ -12,8 +12,8 @@
     <img class="D2D" src="{% static 'images/d2d-logo-BlueBG.png'%}" alt="Draft 2 Digital">
     <form action="{% url 'search' %}" method="GET">
       <div class="search_bar">
+        <input id="search_button" type="image" src="{% static 'images/search-icon.png' %}" alt="Search">
         <input id="user_search" name="q" type="text" placeholder="Enter title, author, isbn...">
-        <input id="search_button" type="submit" value="Search Book">
       </div>
     </form>
 </div> 
