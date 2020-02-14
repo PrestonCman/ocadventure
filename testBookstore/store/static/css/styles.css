@@ -11,7 +11,7 @@
 }
 */
 .home {
-    padding: 150px 100px;
+    padding: 100px 100px;
     text-align: center;
 }
 
@@ -20,16 +20,14 @@
 }
 
 .google_button {
-    padding: 10px 15px 5px;
+    font-size: 150%;
+    padding: 10px 14px 5px 14px;
 }
 
 .google_input {
-    padding: 10px 300px 5px 1px;
-    width: 300px;
-}
-
-.google_input::placeholder {
-    font-size: 180%;
+    font-size: 150%;
+    padding: 10px 0px 5px 1px;
+    width: 600px;
 }
 
 body {
@@ -61,7 +59,7 @@ body {
 .D2D {
     text-align: center;
     width: 15%;
-    margin-left: 18%;
+    margin-left: 30%;
 }
 
 .search_bar {
@@ -70,17 +68,20 @@ body {
 }
 
 .search_bar #search_button {
+    font-size: 110%;
     font-weight: bold;
     border: 2px solid black;
     background-color: #ef4823;
-    padding: 6px 15px;
+    padding: 5px 15px;
 }
 
 .search_bar #user_search {
-    border: 1px solid black;
+    margin-right: 3px;
+    font-size: 110%;
+    border: 2px solid black;
     background-color: #ef4823;
-    padding: 6px 65px 6px 1px;
-    
+    padding: 5px 0px 5px 2px;
+    width: 250px;
 }
 
 .search_bar #user_search::placeholder {
