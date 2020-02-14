@@ -3,44 +3,75 @@
 {% block content %}
 <div class="search">
 
-  <h1>Result for: {{query}}</h1>
+  <h1>Result for : {{query}}</h1>
 
   {% if book_list %}
+  
   <ul>
     {% for book in book_list %}
-      <li>
-        <p>Title: <a href="{% url 'detail' book.id %}">{{book.title}}</a></p>
-        <p>Author: {{book.primary_author}}</p>
-        <p>Genre: {{book.genre}}</p>
-        <p>ISBN: {{book.isbn_13}}</p>
+      <li class="borderlist">
+       <h3><a href="{% url 'detail' book.id %}">{{book.title}}</a></h3>
+        <p>
+        Author: {{book.primary_author}},
+        Genre: {{book.genre}},
+        ISBN: {{book.isbn_13}}
       </li>
     {% endfor %}
   </ul>
+
   {% else %}
     <p>There are no books in the Store.</p>
   {% endif %}
 
 <style>
-ul2{
+  * {
+    box-sizing: border-box;
+  }
+  .borderlist {
     text-align: left;
+    list-style-position:inside;
+    border: 1px solid black;
+    padding-left: 3px;
 }
 
-.sidenav {
-  width: 130px;
-  position: fixed;
-  z-index: 1;
-  top: 200px;
-  left: 10px;
-  background: #eee;
-  overflow-x: hidden;
-  padding: 8px 0;
+.borderlist * {
+  margin: 7px;
 }
 
+  ul2{
+      text-align: left;
+      
+  }
+ 
+  ul{
+    width: 1100px;
+    display:inline-block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 0px;
+    
+  }
+  
+  .sidenav {
+    width: 130px;
+    position: fixed;
+    z-index: 1;
+    top: 200px;
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+  }
+  
 </style>
 {% block sidebar %}
 <div class="sidenav">
     <ul2>
-      <li>Sort by...</li>
+      <l1>Sort by...</l1>
       <li>Title</a></li>
       <li>Author</a></li>
       <li>Publisher</a></li>
