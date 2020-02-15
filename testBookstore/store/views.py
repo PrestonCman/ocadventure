@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
 onix_file = ""
+from lxml import etree
 
 def home(request):
     return render(request, 'store/home.html')
@@ -17,6 +18,101 @@ def bookDetail(request, book_id):
         'book' : get_object_or_404(Book, pk = book_id)
     }
     return render(request, 'store/bookDetail.html', context)
+
+def openFile(xmlfile):
+    with open(xmlfile, 'rb') as fobj:
+        xml = fobj.read()
+    return etree.fromstring(xml)
+
+def ONIXsearch(root, query):
+    return root.xpath(query)
+
+def processONIX(fileName, data):
+    root = openFile(fileName)
+
+
+    book = {
+        "isbn_13" : None,
+        "price" : None,
+        "description" : None,
+        "title" : None,
+        "subtitle": None,
+        "series" : None,
+        "volume" : None,
+        "ready_for_sale" : None,
+        "publisher" : None,
+        "primary_author" : None,
+        "other_authors" : None,
+    }
+
+
+
+
+    books = []
+    
+    queries = {
+        "title" : "Product/DescriptiveDetail[Language/LanguageCode = 'eng']/TitleDetail[TitleType = '01']/TitleElement[TitleElementLevel = '01']/TitleText",
+        "isbn_13" : "Product[DescriptiveDetail/Language/LanguageCode = 'eng']/ProductIdentifier[ProductIDType ='15']/IDValue",                          
+        "description" : "Product[DescriptiveDetail/Language/LanguageCode = 'eng']/CollateralDetail/TextContent[TextType = '03']/Text",          
+        "price" : "Product[DescriptiveDetail/Language/LanguageCode = 'eng']/ProductSupply/SupplyDetail/Price[not(PriceQualifier)]/PriceAmount",
+        "primary_author" : "Product/DescriptiveDetail[Language/LanguageCode = 'eng']/Contributor[SequenceNumber = '1']/PersonName",
+        "ready_for_sale" : "Product[DescriptiveDetail/Language/LanguageCode = 'eng']/PublishingDetail/PublishingStatus", #not final value
+        "publisher" : "Product[DescriptiveDetail/Language/LanguageCode = 'eng']/PublishingDetail/Publisher/PublisherName",
+        }
+
+    numberBooks = len(ONIXsearch(root, "//Product[DescriptiveDetail/Language/LanguageCode = 'eng']"))                    #Retrieve the Total number of books from the file
+
+    for i in range(numberBooks):
+        books.append(book.copy())                               #Create that many book dictionaries
+
+
+    for query in queries:                                       #Go through all the queries
+        results = ONIXsearch(root, queries[query])                  #Get everything I know isthere
+        for i in range(len(books)):                          
+            books[i][query] = results[i].text                   #set element of book dictionary equal to retrieved value
+
+
+    for book in books:
+        if(book["ready_for_sale"] == '04'):
+            book["ready_for_sale"] = True
+        elif(book["ready_for_sale"] == '07'):
+            book["ready_for_sale"] = False
+        else:
+            books.remove(book)
+
+    for book in books:
+        isbn = book["isbn_13"]
+        subtitle = "Product[ProductIdentifier/IDValue = " + str(isbn) + "]/DescriptiveDetail/TitleDetail/TitleElement/Subtitle"
+        try:
+            results = ONIXsearch(root, subtitle)[0]
+            book["subtitle"] = results.text
+        except:
+            book["subtitle"] = results.text
+
+        series = "Product[ProductIdentifier/IDValue = " + str(isbn) + "]/DescriptiveDetail/Collection/TitleDetail/TitleElement/TitleText"
+        try:
+            results = ONIXsearch(root, series)[0]
+            book["bookseries"] = results.text
+        except:
+            book["bookseries"] = None
+
+
+        authors = ONIXsearch(root, "Product[ProductIdentifier/IDValue = " + str(isbn) + "]/DescriptiveDetail/Contributor/PersonName")
+        book["primary_author"] = authors[0].text
+        if(len(authors) != 1):
+            buffer = ""
+            for i in range(1, len(authors)):
+                if(i != 1):
+                    buffer += ", "
+                buffer += authors[i].text
+            book["other_authors"] = buffer
+
+
+        volume = ONIXsearch(root, "Product[ProductIdentifier/IDValue = " + str(isbn) + "]/DescriptiveDetail/Collection/TitleDetail/TitleElement/PartNumber")
+        if(len(volume) != 0):
+            book["volume"] = volume[0].text
+
+        #list of books ready, return where needed
 
 class search(ListView):
     model = Book
