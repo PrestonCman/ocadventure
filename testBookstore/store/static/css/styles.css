@@ -1,27 +1,15 @@
-/*.book_info {
-    background-color: lightgrey;
-    width: 22%;
-    border: 7px solid gray;
-    padding: 5px;
-    margin: auto;
-}
-
-.book_info * {
-    height: 4px;
-}
-*/
 .home {
     padding: 100px 85px;
     text-align: center;
 }
 
 .google {
-    font-size: 40px;
+    font-size: 300%;
 }
 
 .google_search {
     text-align: center;
-    margin-left: 16%;
+    margin-left: 17%;
 }
 
 .google_button {
@@ -65,6 +53,8 @@ body {
     padding: 5px;
     border-radius: 6px;
     border: 2px solid black;
+    position: absolute;
+    left: 0;
 }
 
 .header {
@@ -77,16 +67,18 @@ body {
 }
 
 .D2D {
+    position: relative;
     text-align: center;
     padding: 10px 0px;
     width: 20%;
-    margin-left: 24%;
 }
 
 .search_bar {
     float: right;
     margin: 1.8%;
     margin-right: 4%;
+    position: absolute;
+    right: 0;
 }
 
 .search_bar #search_button {
@@ -108,7 +100,7 @@ body {
     border: 2px solid black;
     border-left: none;
     background-color: white;
-    padding: 5px 0px 5px 2px;
+    padding: 5px 0px 5.5px 2px;
     width: 275px;
 }
 
@@ -124,6 +116,28 @@ body {
 ul2{
     text-align: left;
 }
+
+.books * {
+    box-sizing: border-box;
+}
+
+.borderlist {
+    text-align: left;
+    list-style-position:inside;    
+    border: 1px solid black;
+    padding-left: 5px;
+}
+
+.books {
+    width: 500px;
+    display:inline-block;
+    list-style-type: none;
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    margin-top: 5px;
+    padding: 0px;
+  }
 
 .sidenav {
   width: 130px;
