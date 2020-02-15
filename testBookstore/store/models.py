@@ -14,7 +14,6 @@ class Book(models.Model):
     
     isbn_13 = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
-    genre = models.CharField(max_length=100)
     description = models.CharField(max_length=700)
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=200, null=True, blank = True)
@@ -25,16 +24,14 @@ class Book(models.Model):
     publisher = models.CharField(max_length=100)
     primary_author = models.CharField(max_length=300)
     other_authors = models.CharField(max_length=100,null=True, blank = True)
-   
-    file_path = models.CharField(max_length=256)
-    linenos = models.BooleanField(default=False)
     class Meta:
         ordering = ['title']
     
     def __str__(self):
        return self.title
    
-
+class LastONIXFile(models.Model):
+    file_path = models.CharField(max_length=250)
     
 
 

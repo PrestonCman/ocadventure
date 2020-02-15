@@ -3,10 +3,11 @@ from django.views.generic import TemplateView, ListView
 from .models import Book
 from django.db.models import Q
 from .serializers import BookSerializer
-from rest_framework import generics
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
+if 
 onix_file = ""
 from lxml import etree
 
@@ -132,22 +133,35 @@ class search(ListView):
         data['query'] = self.request.GET.get('q')
         return data
 
-class ProcessBook(generics.GenericAPIView):
+class ProcessBook(APIView):
     serializer_class = BookSerializer
 
-    def get(self, request): 
-        # print(request["filepath"])
-        # onix_file = open(request["filepath"])
-        onix_file = open("/Users/preston/Documents/Programs/teamproject/testBookstore/store/idiot.txt")
+    def get(self, request, filepath): 
+        onix_file = open("store/"+filepath)
+
         return HttpResponse(onix_file.name)
         
     # post isn't working yet
-    def post(self, request):
-        print("POST!\n\n\n")
-        return HttpResponse(request)
+    def put(self, request):
+        book = request.data
+        serializer = BookSerializer(data=book)
 
-class IngestBook(generics.GenericAPIView):
-    serializer_class = BookSerializer
+        # try:
+        #     existingBook = Book.objects.get(isbn_13=book["isbn_13"])
+        #     print("book exists")
+        #     if serializer.is_valid:
+        #         print(book["isbn_13"])
+        #         existingBook["isbn_13"] = book["isbn_13"]
+        #         existingBook.save()
+        # except:
+        #     print("Exception found")
+        #     if serializer.is_valid(raise_exception=True):
+        #         book_saved = serializer.save()
+
+
+
+        # print(request.data.get('title'))
+        
+        return HttpResponse()
     
-    def post (self, request):
-        onix_file = open(request)
+
