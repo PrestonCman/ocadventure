@@ -15,15 +15,15 @@ def bookDetail(request, book_id):
 class search(ListView):
     model = Book
     template_name = 'store/search.html'
+    paginate_by = 2
 
     #q is the name given to the user input, object list is the resulting query set after checking 
     #all the books if ISBN, primary author, other authors, or title contains the user query.
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Book.objects.filter(Q(title__icontains=query) | Q(primary_author__icontains=query) |
+        queryset = Book.objects.filter(Q(title__icontains=query) | Q(primary_author__icontains=query) |
                                           Q(other_authors__icontains=query) | Q(isbn_13__icontains=query))
-        print(object_list)      #remove this later when html list display is added.  
-        return object_list
+        return queryset
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data()

@@ -11,5 +11,27 @@
     <img class="D2D" src="{% static 'images/d2d-logo-BlueBG.png'%}" alt="Draft 2 Digital">
     {% block search %}{% endblock %}
 </div> 
-{% block content %}{% endblock %}
+<div>
+  <div class="col-sm-10 ">{% block content %} {% endblock %}
+{% block pagination %}
+{% if is_paginated %}
+<div class="pagination" style="text-align: center;">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+</div>
+{% endblock %}
+
+</div>
+
 </html>
