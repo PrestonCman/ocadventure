@@ -147,4 +147,9 @@ body {
 .bookDetail * {
     text-align: center;
 }
+.pagination {
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+}
   
