@@ -17,6 +17,10 @@ def bookDetail(request, book_id):
 class search(ListView):
     model = Book
     template_name = 'store/search.html'
+<<<<<<< HEAD
+=======
+    paginate_by = 5
+>>>>>>> master
 
     #q is the name given to the user input, object list is the resulting query set after checking 
     #all the books if ISBN, primary author, other authors, or title contains the user query.

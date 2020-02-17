@@ -168,4 +168,14 @@ body {
 
 .bookDetail * {
     text-align: center;
+<<<<<<< HEAD
 }
+=======
+}
+.pagination {
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+}
+  
+>>>>>>> master
