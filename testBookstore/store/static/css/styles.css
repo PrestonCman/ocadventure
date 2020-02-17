@@ -130,7 +130,7 @@ ul2{
 }
 
 .books {
-    width: 500px;
+    width: 64%;
     display:inline-block;
     list-style-type: none;
     border: 1px solid #ddd;
