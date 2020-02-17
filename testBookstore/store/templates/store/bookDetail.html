@@ -1,24 +1,40 @@
 {% extends "base_store.html" %}
 
 {% block content %}
-<h1>{{book.title}}</h1>
-{% if book.volume %}
-    <h4>Volume {{book.volume}}</h4>
-{% endif %}
-{% if book.series %}
-    <h4>Series: {{book.series}}</h4>
-{% endif %}
+
+<div class="bookDetail">
+    <h1 style="text-align: center;">{{book.title}}</h1>
+<ul>
+<div class="topbox">
 {% if book.other_authors %}
-    <h4>By: {{book.primary_author}}, {{book.other_authors}},    ISBN: {{book.isbn_13}},    {{book.genre}}</h4>
+<h4 id = "author">By: {{book.primary_author}}, {{book.other_authors}} </h4><h2 id="price">Price: {{book.price}}</h2>
 {% else %}
-    <h4>By: {{book.primary_author}}, ISBN: {{book.isbn_13}},    {{book.genre}}</h4>
+<h4 id="author">By: {{book.primary_author}} </h4> <h2 id="price">Price: {{book.price}}</h2>
 {% endif %}
-<h4>Price: {{book.price}}</h4>
-<h4>Description: {{book.description}}</h4>
-<h4>Publisher: {{book.publisher}}</h4>
+</div>
+
+<div class="boxlist">
+    <h4>ISBN: {{book.isbn_13}}</h4>
+    <h4>Publisher: {{book.publisher}}</h4>
+    <h4>Genre: {{book.genre}}</h4>
+    {% if book.volume %}
+        <h4>Volume: {{book.volume}}</h4>
+    {% endif %}
+    {% if book.series %}
+        <h4>Series: {{book.series}}</h4>
+    {% endif %}
+</div>
+<div class = "boxlist">
+    <h4>Description: {{book.description}}</h4>
+</div>
+</ul>
 {% if book.ready_for_sale %}
-    <h4>This book is ready for sale!</h4>
+    <h2 style="text-align: center;">This book is ready for sale!</h2>
 {% else %}
-    <h4>This book not currently for sale</h4>
+    <h2 style="text-align: center;">This book not currently for sale</h2>
 {% endif %}
+
+
+</div>
 {% endblock %}
+
