@@ -4,8 +4,8 @@
 {% load static %}
 <form action="{% url 'search' %}" method="GET">
     <div class="search_bar">
-      <input id="search_button" type="image" src="{% static 'images/search-icon.png' %}" alt="Search">
       <input id="user_search" name="q" type="text" placeholder="Enter title, author, isbn...">
+      <input id="search_button" type="image" src="{% static 'images/search-icon.png' %}" alt="Search">
     </div>
   </form>
 {% endblock %}
