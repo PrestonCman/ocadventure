@@ -7,8 +7,9 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
-onix_file = ""
 from lxml import etree
+
+onix_file = ""
 
 def home(request):
     return render(request, 'store/home.html')
@@ -27,7 +28,7 @@ def openFile(xmlfile):
 def ONIXsearch(root, query):
     return root.xpath(query)
 
-def processONIX(fileName, data):
+def processONIX(fileName):
     root = openFile(fileName)
 
 
@@ -112,12 +113,14 @@ def processONIX(fileName, data):
         if(len(volume) != 0):
             book["volume"] = volume[0].text
 
+        return books
 
 def postBooks(books):
     serializer_class = BookSerializer
     invalid_books = []
     for book in books:
         bookData = BookSerializer(data=book)
+        print("Posting...")
         try:
             existingBook = Book.objects.get(isbn_13=book["isbn_13"])
 
@@ -173,17 +176,17 @@ class ProcessBook(APIView):
             onix_file = self.request.query_params["filepath"]
             fileSave = LastONIXFile(file_path=onix_file)
             fileSave.save()
-
+            onix_file = fileSave.file_path
         return HttpResponse(onix_file)
         
-    def put(self, request, *args):
+    def put(self, request):
         response = "Books added successfully"
-        invalid_books = postBooks(processONIX("/Users/preston/Documents/Programs/teamproject/testBookstore/store/20190110Update_stripped.xml"))
+        invalid_books = postBooks(processONIX(LastONIXFile.objects.get().file_path))
         if(len(invalid_books) != 0):
-            respone = "Error: Some books were invalid, check console for more information"
+            response = "Error: Some books were invalid, check console for more information"
             for i in invalid_books:
                 print(i)
-      
+
         return HttpResponse(response)
     
 
