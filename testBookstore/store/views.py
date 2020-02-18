@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
-if 
 onix_file = ""
 from lxml import etree
 
