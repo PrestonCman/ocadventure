@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
-from .models import Book
+from .models import Book, LastONIXFile
 from django.db.models import Q
 from .serializers import BookSerializer
 from rest_framework.views import APIView
@@ -113,8 +113,36 @@ def processONIX(fileName, data):
         if(len(volume) != 0):
             book["volume"] = volume[0].text
 
-        #list of books ready, return where needed
 
+def postBooks(books):
+    serializer_class = BookSerializer
+    invalid_books = []
+    for book in books:
+        bookData = BookSerializer(data=book)
+        try:
+            existingBook = Book.objects.get(isbn_13=book["isbn_13"])
+
+            existingBook.isbn_13 = book["isbn_13"]
+            existingBook.price = book["price"]
+            existingBook.description = book["description"]
+            existingBook.title = book["title"]
+            existingBook.subtitle = book["subtitle"]
+            existingBook.series = book["series"]
+            existingBook.volume = book["volume"]
+            existingBook.ready_for_sale = book["ready_for_sale"]
+            existingBook.publisher = book["publisher"]
+            existingBook.primary_author = book["primary_author"]
+            existingBook.other_authors = book["other_authors"]
+             
+            existingBook.save()
+        except:
+            if bookData.is_valid():
+                bookData.save()
+            else:
+                invalid_books.append(book)
+    return invalid_books
+
+       
 class search(ListView):
     model = Book
     template_name = 'store/search.html'
@@ -136,32 +164,27 @@ class search(ListView):
 class ProcessBook(APIView):
     serializer_class = BookSerializer
 
-    def get(self, request, filepath): 
-        onix_file = open("store/"+filepath)
+    def get(self, request):      
+        try:
+            onix_file = self.request.query_params["filepath"]
+            fileSave = LastONIXFile.objects.get()
+            fileSave.file_path = onix_file
+            fileSave.save()
+        except:
+            onix_file = self.request.query_params["filepath"]
+            fileSave = LastONIXFile(file_path=onix_file)
+            fileSave.save()
 
-        return HttpResponse(onix_file.name)
+        return HttpResponse(onix_file)
         
-    # post isn't working yet
-    def put(self, request):
-        book = request.data
-        serializer = BookSerializer(data=book)
-
-        # try:
-        #     existingBook = Book.objects.get(isbn_13=book["isbn_13"])
-        #     print("book exists")
-        #     if serializer.is_valid:
-        #         print(book["isbn_13"])
-        #         existingBook["isbn_13"] = book["isbn_13"]
-        #         existingBook.save()
-        # except:
-        #     print("Exception found")
-        #     if serializer.is_valid(raise_exception=True):
-        #         book_saved = serializer.save()
-
-
-
-        # print(request.data.get('title'))
-        
-        return HttpResponse()
+    def put(self, request, *args):
+        response = "Books added successfully"
+        invalid_books = postBooks(processONIX("/Users/preston/Documents/Programs/teamproject/testBookstore/store/20190110Update_stripped.xml"))
+        if(len(invalid_books) != 0):
+            respone = "Error: Some books were invalid, check console for more information"
+            for i in invalid_books:
+                print(i)
+      
+        return HttpResponse(response)
     
 
