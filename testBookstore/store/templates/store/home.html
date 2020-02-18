@@ -1,11 +1,14 @@
 {% extends "base_store.html" %}
 
 {% block content %}
+{% load static %}
 <div class="home">
       <h1 class="google">Welcome to the Draft 2 Digital Test Bookstore!</h1>
       <form action="{% url 'search' %}" method="GET">
+        <div class="google_search">
+          <input class="google_button" type="image" src="{% static 'images/search-icon.png' %}" alt="Search">
           <input class="google_input" name="q" type="text" placeholder="Enter title, author, isbn...">
-          <input class="google_button" type="submit" value="Search Book">
+        </div>
       </form>
 </div>
 {% endblock %}

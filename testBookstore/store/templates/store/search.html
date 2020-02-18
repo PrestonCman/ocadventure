@@ -1,12 +1,10 @@
-{% extends "base_store.html" %}
+{% extends "base_store_searchbar.html" %}
 
 {% block content %}
 <div class="search">
 
-  <h1>Result for : {{query}}</h1>
-
-  {% if book_list %}
-  
+{% if book_list %}
+<h1>Result for : {{query}}</h1>
   <ul class="boxlist">
     {% for book in book_list %}
       <li class="borderlist">
@@ -15,6 +13,7 @@
         Author: {{book.primary_author}},
         Genre: {{book.genre}},
         ISBN: {{book.isbn_13}}
+        </p>
       </li>
     {% endfor %}
   </ul>
@@ -38,7 +37,7 @@
   {% endblock %}
 
   {% else %}
-    <p>There are no books in the Store.</p>
+    <h1>No books in store with '{{query}}'.</h1>
   {% endif %}
 
 </div>

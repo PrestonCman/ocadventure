@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Book, LastONIXFile
 from django.db.models import Q
 from .serializers import BookSerializer
@@ -157,6 +159,11 @@ class search(ListView):
         queryset = Book.objects.filter(Q(title__icontains=query) | Q(primary_author__icontains=query) |
                                           Q(other_authors__icontains=query) | Q(isbn_13__icontains=query))
         return queryset
+
+    def render_to_response(self, context):
+        if self.request.GET.get('q') == '':
+            return redirect('home')
+        return super().render_to_response(context)
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data()
