@@ -149,6 +149,7 @@ body {
       margin: 0;
       float:right;
       vertical-align: bottom;
+      padding-top: 1.5%;
 }
 
 .boxlist h4 {
@@ -174,4 +175,11 @@ body {
     bottom: 10%;
     width: 100%;
 }
+
+.title {
+    margin-bottom: 0;
+}
   
+.detail_margin {
+    margin-top: 0;
+}

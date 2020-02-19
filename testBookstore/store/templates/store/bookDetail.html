@@ -3,20 +3,19 @@
 {% block content %}
 
 <div class="bookDetail">
-    <h1 style="text-align: center;">{{book.title}}</h1>
-<ul>
+    <h1 class="title">{{book.title}}</h1>
+<ul class="detail_margin">
 <div class="topbox">
 {% if book.other_authors %}
-<h4 id = "author">By: {{book.primary_author}}, {{book.other_authors}} </h4><h2 id="price">Price: {{book.price}}</h2>
+<h2 id = "author">By: {{book.primary_author}}, {{book.other_authors}} </h2><h2 id="price">Price: {{book.price}}</h2>
 {% else %}
-<h4 id="author">By: {{book.primary_author}} </h4> <h2 id="price">Price: {{book.price}}</h2>
+<h2 id="author">By: {{book.primary_author}} </h2> <h2 id="price">Price: {{book.price}}</h2>
 {% endif %}
 </div>
 
 <div class="boxlist">
     <h4>ISBN: {{book.isbn_13}}</h4>
     <h4>Publisher: {{book.publisher}}</h4>
-    <h4>Genre: {{book.genre}}</h4>
     {% if book.volume %}
         <h4>Volume: {{book.volume}}</h4>
     {% endif %}
@@ -25,13 +24,13 @@
     {% endif %}
 </div>
 <div class = "boxlist">
-    <h4>Description: {{book.description}}</h4>
+    <h4>Description: {{book.clean_description}}</h4>
 </div>
 </ul>
 {% if book.ready_for_sale %}
-    <h2 style="text-align: center;">This book is ready for sale!</h2>
+    <h2>This book is ready for sale!</h2>
 {% else %}
-    <h2 style="text-align: center;">This book not currently for sale</h2>
+    <h2>This book not currently for sale</h2>
 {% endif %}
 
 
