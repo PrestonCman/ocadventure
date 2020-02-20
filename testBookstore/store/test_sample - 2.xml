@@ -1,0 +1,923 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ONIXMessage release="3.0">
+<Header>
+    <Sender>
+      <SenderName>Draft2Digital, LLC</SenderName>
+      <ContactName>Support (866) 336-5099</ContactName>
+      <EmailAddress>support@draft2digital.com</EmailAddress>
+    </Sender>
+    <SentDateTime>20190103T120534+0000</SentDateTime>
+</Header>
+<Product>
+    <RecordReference>com.draft2digital.onix.9781386379522</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9781386379522</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9781386379522</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <Collection>
+        <CollectionType>10</CollectionType>
+        <TitleDetail>
+          <TitleType>01</TitleType>
+          <TitleElement>
+            <SequenceNumber>2</SequenceNumber>
+            <TitleElementLevel>02</TitleElementLevel>
+            <TitleText>Wrath Of Abel</TitleText>
+          </TitleElement>
+          <TitleElement>
+            <SequenceNumber>3</SequenceNumber>
+            <TitleElementLevel>01</TitleElementLevel>
+            <PartNumber>1</PartNumber>
+          </TitleElement>
+        </TitleDetail>
+      </Collection>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>An Assassin Is Born</TitleText>
+          <Subtitle>Wrath Of Abel, #1</Subtitle>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>An Assassin Is Born (Wrath Of Abel, #1)</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Simon Harrak</PersonName>
+        <PersonNameInverted>Harrak, Simon</PersonNameInverted>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>eng</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC002000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC031010</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC050000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+        <SubjectHeadingText>crime action; spy; assassin; crime; action; espionage; violent; coming of age</SubjectHeadingText>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;&lt;strong&gt;HE'S YOUNG, LOST AND DANGEROUS.. AND HE'S ABOUT TO BE UNLEASHED.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Frederich Abel knows he's not normal, but being adopted age seven by an elite soldier isn't why. It lies deeper inside - a morbid, unhinged savagery. Invisible. Deadly.&lt;/p&gt;&lt;p&gt;Luckily, his father helped him control it with a mixture of weapons, combat and survival training. Now, his father is dead, and the shadow has emerged stronger than ever. He flees in panic, ending up in cold, grimy Berlin.&lt;/p&gt;&lt;p&gt;He's on edge, until Ida's scream through the rain pulls him into action. He's forced to kill, unaware that the perpetrator had dangerous friends - powerful enough to tame world governments. It's time to decide; flee again, or face the darkness - both inside and out.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;'An Assassin Is Born' is the intriguing origin story of Frederich Abel and the first book in the 'Wrath Of Abel' crime-action book series.&lt;/strong&gt;&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>Simon Harrak</PublisherName>
+      </Publisher>
+      <PublishingStatus>04</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20181202</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>04</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20181202</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>20</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>5.99</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>0.60</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+</Product>
+<Product>
+    <RecordReference>com.draft2digital.onix.9781386863717</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9781386863717</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9781386863717</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <NoCollection/>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Boys I Forgot to Kiss</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Boys I Forgot to Kiss</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Dipu Darko</PersonName>
+        <PersonNameInverted>Darko, Dipu</PersonNameInverted>
+        <BiographicalNote>&lt;p&gt;Dipu Darko was born to spill dreams living inside her for six hundred moons. She currently writes screenplays for a production house&amp;nbsp;inbetween navigating&amp;nbsp;new galaxies and attending foot fetish parties.&lt;/p&gt;</BiographicalNote>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>eng</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>YAF052020</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>YAF052060</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+        <SubjectHeadingText>romance</SubjectHeadingText>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Boys I forgot to kiss is a sad, listless, poignant take on unrequited love;on silly guy encounters that could have transitioned to something more if taken forward, if taken seriously, if at all.A merry work of fiction that speaks about millenial romance in the time of social media.&lt;/p&gt;</Text>
+      </TextContent>
+      <TextContent>
+        <TextType>12</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Dipu Darko was born to spill dreams living inside her for six hundred moons. She currently writes screenplays for a production house&amp;nbsp;inbetween navigating&amp;nbsp;new galaxies and attending foot fetish parties.&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>Dipu Darko</PublisherName>
+      </Publisher>
+      <PublishingStatus>04</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20180828</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>04</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20180828</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>20</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>1.50</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>0.15</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+</Product>
+<Product>
+    <RecordReference>com.draft2digital.onix.9781386434450</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9781386434450</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9781386434450</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <NoCollection/>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>The Devil Made Him Do It: A Shocking True Crime Story of Mass Murder</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>The Devil Made Him Do It: A Shocking True Crime Story of Mass Murder</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Rod Kackley</PersonName>
+        <PersonNameInverted>Kackley, Rod</PersonNameInverted>
+        <BiographicalNote>&lt;p&gt;Rod Kackley is an award-winning author and journalist, with a lifelong fascination of crime, who lives in Grand Rapids, Mich.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Rod also writes crime fiction books in the St. Isidore Collection.&lt;/p&gt;</BiographicalNote>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>eng</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>TRU002010</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>BIO024000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+        <SubjectHeadingText>jason dalton; mass murder; serial killer; kalamazoo; michigan; homicide; murder; crime; true crime; true crime stories; shocking true crime stories</SubjectHeadingText>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Jason Dalton was driving through downtown Kalamazoo killing people, seemingly at random.&lt;/p&gt;&lt;p&gt;But this was not a night of random slaughter. There was a method to the madness of Jason 's mass murder spree. An app on Jason's iPhone that glowed like the devil was telling him whom to kill.&amp;nbsp;&lt;/p&gt;&lt;p&gt;It was a terrifying night in February 2016 as the people of Kalamazoo, Mich. stayed glued to their TVs and radios while bodies were falling and gunfire was reported throughout the city. Each time Jason was pulling the trigger. Each time the devil in his smartphone was telling him who should live and who should die.&lt;/p&gt;&lt;p&gt;Mothers, fathers, husbands, and wives frantically texted their loved ones to make sure they were not among the dead.&lt;/p&gt;&lt;p&gt;This is the story of the people Jason Dalton allegedly killed, those who survived, those who sacrificed themselves to save others, and how Jason was able to stay one step ahead of the police officers until the devil on his smartphone told Jason to stop killing on this blood-soaked night in Kalamazoo.&lt;/p&gt;&lt;p&gt;The Devil Made Him Do It: A Shocking True Crime Story of Mass Murder that Kalamazoo, Mich. will never forget.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&amp;nbsp;&lt;/p&gt;</Text>
+      </TextContent>
+      <TextContent>
+        <TextType>12</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Rod Kackley is an award-winning author and journalist, with a lifelong fascination of crime, who lives in Grand Rapids, Mich.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Rod also writes crime fiction books in the St. Isidore Collection.&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>Rod Kackley</PublisherName>
+      </Publisher>
+      <PublishingStatus>04</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20170502</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>04</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20170502</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>20</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>11.99</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>1.20</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+</Product>
+<Product>
+    <RecordReference>com.draft2digital.onix.9782956062400</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9782956062400</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9782956062400</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <Collection>
+        <CollectionType>10</CollectionType>
+        <TitleDetail>
+          <TitleType>01</TitleType>
+          <TitleElement>
+            <SequenceNumber>2</SequenceNumber>
+            <TitleElementLevel>02</TitleElementLevel>
+            <TitleText>Paul Storey Thrillers</TitleText>
+          </TitleElement>
+          <TitleElement>
+            <SequenceNumber>3</SequenceNumber>
+            <TitleElementLevel>01</TitleElementLevel>
+            <PartNumber>2</PartNumber>
+          </TitleElement>
+        </TitleDetail>
+      </Collection>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>One Punch</TitleText>
+          <Subtitle>Paul Storey Thrillers, #2</Subtitle>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>One Punch (Paul Storey Thrillers, #2)</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Keith Dixon</PersonName>
+        <PersonNameInverted>Dixon, Keith</PersonNameInverted>
+        <BiographicalNote>&lt;p&gt;Keith Dixon was born in Yorkshire and grew up in the Midlands. He&amp;rsquo;s been writing since he was thirteen years old in a number of different genres: thriller, espionage, science fiction, literary.&lt;/p&gt;&lt;p&gt;He&amp;rsquo;s the author of seven novels in the Sam Dyke Investigations series and two other non-crime works, as well as two collections of blog posts on the craft of writing.&lt;/p&gt;&lt;p&gt;When he&amp;rsquo;s not writing he enjoys reading, learning the guitar, watching movies and binge-inhaling great TV series. He&amp;rsquo;s currently spending more time in France than is probably good for him.&lt;br /&gt;&lt;br /&gt;Learn more about Keith by following him on Twitter @keithyd6, by reading his blog at www.cwconfidential.blogspot.com or connect with him on Facebook at http://www.facebook.com/SamDykeInvestigations/ On his website you can download a couple of free books and find out more about the others: www.keithdixonnovels.com.&lt;/p&gt;</BiographicalNote>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>eng</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC031010</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC030000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+        <SubjectHeadingText>british crime novel; crime novel; crime fiction; gripping thriller; psychological suspense; pulp novel; hard-boiled</SubjectHeadingText>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Paul Storey is an ex-cop looking for a job. Bran Doyle was a boxer but he&amp;rsquo;s now looking for a driver. And perhaps a little more.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Storey takes the job but soon finds himself involved in more than driving. There&amp;rsquo;s a murder. And conspiracy. And another murder.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;em&gt;And then the real trouble starts.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;One Punch&lt;/em&gt;&amp;nbsp;continues the series begun by&amp;nbsp;&lt;em&gt;Storey&lt;/em&gt;, described by one reviewer as a &amp;ldquo;highly intelligent, witty and well-plotted thriller&amp;rdquo;, and by others as &amp;ldquo;very entertaining&amp;rdquo;, &amp;ldquo;a great read&amp;rdquo; and &amp;ldquo;an unusual thriller&amp;rdquo;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;If you like thrillers with surprising characters, intricate plots, lots of humour and exciting action, then One Punch should fit the bill.&lt;/strong&gt;&lt;/p&gt;</Text>
+      </TextContent>
+      <TextContent>
+        <TextType>12</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Keith Dixon was born in Yorkshire and grew up in the Midlands. He&amp;rsquo;s been writing since he was thirteen years old in a number of different genres: thriller, espionage, science fiction, literary.&lt;/p&gt;&lt;p&gt;He&amp;rsquo;s the author of seven novels in the Sam Dyke Investigations series and two other non-crime works, as well as two collections of blog posts on the craft of writing.&lt;/p&gt;&lt;p&gt;When he&amp;rsquo;s not writing he enjoys reading, learning the guitar, watching movies and binge-inhaling great TV series. He&amp;rsquo;s currently spending more time in France than is probably good for him.&lt;br /&gt;&lt;br /&gt;Learn more about Keith by following him on Twitter @keithyd6, by reading his blog at www.cwconfidential.blogspot.com or connect with him on Facebook at http://www.facebook.com/SamDykeInvestigations/ On his website you can download a couple of free books and find out more about the others: www.keithdixonnovels.com.&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>Semiologic Ltd</PublisherName>
+      </Publisher>
+      <PublishingStatus>07</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20170508</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>07</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20170508</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>40</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>0.99</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>0.10</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+</Product>
+<Product>
+    <RecordReference>com.draft2digital.onix.9781524214777</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9781524214777</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9781524214777</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <NoCollection/>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Man Strokes</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Man Strokes</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Megan Reddaway</PersonName>
+        <PersonNameInverted>Reddaway, Megan</PersonNameInverted>
+      </Contributor>
+      <Contributor>
+        <SequenceNumber>2</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Jae Jordon</PersonName>
+        <PersonNameInverted>Jordon, Jae</PersonNameInverted>
+      </Contributor>
+      <Contributor>
+        <SequenceNumber>3</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>K.Y. Shelton</PersonName>
+        <PersonNameInverted>Shelton, K.Y.</PersonNameInverted>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>eng</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC011000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC027190</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC003000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+        <SubjectHeadingText>gay romance; male male; manlove; paranormal; contemporary; novella; bundle; standalone; stand alone; werewolves; biker; first time; funny; humor; shifters</SubjectHeadingText>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;3 Gay Romance Novellas:&lt;br /&gt;MAKE ME HOWL &amp;ndash; by Jae Jordon&lt;br /&gt;It&amp;#39;s never fun, when coming out gets you thrown out&amp;mdash;especially when you haven&amp;#39;t done any gay stuff yet. It&amp;#39;s worse when you&amp;rsquo;re not even sure you&amp;rsquo;re gay. Dale&amp;rsquo;s had to stay with best friend Kirk since his parents made him homeless. When he tries to find love, he&amp;rsquo;s attacked. Then two handsome foreigners move in across the street, and Dale finds he knows exactly what he wants. But can he get it?&lt;/p&gt;&lt;p&gt;Juke, a Greenland alpha, must find his true mate before the rise of the next new moon, or be forced to marry the woman chosen by his father. He&amp;rsquo;s relieved when he senses his mate in the home of Dale and Kirk. Believing his search is over, Juke and his friend go to meet their neighbors. But Juke&amp;rsquo;s mate is not what he expects&amp;mdash;at all.&lt;/p&gt;&lt;p&gt;Two men, with different problems&amp;mdash;could each of them be what the other is looking for?&lt;/p&gt;&lt;p&gt;THE INVITATION &amp;ndash; by K.Y. Shelton&lt;br /&gt;Cynical ex-football hunk Jesse needs his wedding booth photography business to keep pulling work to pay his bills. But when a job puts him face to face with an old friend who&amp;rsquo;d abandoned him years ago, Jesse is furious. Aaron, the nerdy shy guy who vanished without a trace after high school, is taller, broader and alive.&lt;/p&gt;&lt;p&gt;Jesse knows he needs to speak with him. But the hundreds of guests keep both the photo booth and the best man Aaron busy with activity. And the neurotic wedding planner watches on with an eagle eye. With time running out, Jesse must make a choice. Forge his professional reputation, or confront the old friend who&amp;#39;d broken him all those years ago.&lt;/p&gt;&lt;p&gt;BIG GUY&amp;nbsp; - by Megan Reddaway&lt;br /&gt;Overweight Truman Rautigan and his mom are about to be made homeless, but she&amp;#39;s a top slimming salesperson who could win her dream house if Truman comes through with some sales of his own. Instead, he&amp;rsquo;s stashing food in his bottom drawer and indulging in late-night binges.&amp;nbsp;&lt;/p&gt;&lt;p&gt;When his mom sends him to infiltrate a rival weight loss group, he meets the gorgeous Brad, biker, mechanic and successful slimmer. But Brad couldn&amp;rsquo;t be interested in Truman, could he? What if he knew Truman&amp;rsquo;s real reason for being there? Truman could lose everything if his shameful secrets are exposed&amp;hellip;&lt;/p&gt;&lt;p&gt;Warning: contains gorgeous guys getting together, a long lost love, a shifter in search of a mate, and a bizarre weight loss plan.&lt;/p&gt;&lt;p&gt;Length: 159 pages&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>Wild Romance Books</PublisherName>
+      </Publisher>
+      <PublishingStatus>07</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20160225</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>07</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20160225</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>40</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>2.99</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>0.30</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+  </Product>
+  <Product>
+    <RecordReference>com.draft2digital.onix.9781386655510</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9781386655510</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9781386655510</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <Collection>
+        <CollectionType>10</CollectionType>
+        <TitleDetail>
+          <TitleType>01</TitleType>
+          <TitleElement>
+            <SequenceNumber>2</SequenceNumber>
+            <TitleElementLevel>02</TitleElementLevel>
+            <TitleText>A Franny Calico Mystery</TitleText>
+          </TitleElement>
+        </TitleDetail>
+      </Collection>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Murder &amp; Mistletoe</TitleText>
+          <Subtitle>A Franny Calico Mystery</Subtitle>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Murder &amp; Mistletoe (A Franny Calico Mystery)</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>AR DeClerck</PersonName>
+        <PersonNameInverted>DeClerck, AR</PersonNameInverted>
+        <BiographicalNote>&lt;p&gt;AR DeClerck is a wife, mother, romance writer and all-around goofball. Reading ninja, food assassin and self-proclaimed nerd.&amp;nbsp;&lt;/p&gt;&lt;p&gt;AR writes romance from the comfort of her couch in her little house on the Mighty Mississippi. She hopes her readers remember what it&amp;#39;s like to fall in love.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Connect with AR DeClerck on Facebook at https://www.facebook.com/authoramydecerck&lt;/p&gt;&lt;p&gt;and sign up for her newsletter at&amp;nbsp;&lt;/p&gt;&lt;p&gt;http://www.eepurl.com/cecnzL&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</BiographicalNote>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>eng</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC062000</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC022100</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC022070</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC022060</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+        <SubjectHeadingText>cozy mystery; mystery; detective; 1920s</SubjectHeadingText>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;When American seamstress Franny Calico wakes to find her friend has gone missing from a speeding train, she knows that something strange is afoot. Aided by the handsome conductor, Warburton Smith, and her friend Inspector Gustalt, Franny will tear all of France apart to find Millie Valentine, even if it means putting her own life at risk.&lt;/p&gt;</Text>
+      </TextContent>
+      <TextContent>
+        <TextType>12</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;AR DeClerck is a wife, mother, romance writer and all-around goofball. Reading ninja, food assassin and self-proclaimed nerd.&amp;nbsp;&lt;/p&gt;&lt;p&gt;AR writes romance from the comfort of her couch in her little house on the Mighty Mississippi. She hopes her readers remember what it&amp;#39;s like to fall in love.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Connect with AR DeClerck on Facebook at https://www.facebook.com/authoramydecerck&lt;/p&gt;&lt;p&gt;and sign up for her newsletter at&amp;nbsp;&lt;/p&gt;&lt;p&gt;http://www.eepurl.com/cecnzL&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>AR DeClerck</PublisherName>
+      </Publisher>
+      <PublishingStatus>04</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20180405</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>04</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20180405</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>20</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>1.99</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>0.20</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+  </Product>
+  <Product>
+    <RecordReference>com.draft2digital.onix.9781386426103</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier>
+      <ProductIDType>03</ProductIDType>
+      <IDValue>9781386426103</IDValue>
+    </ProductIdentifier>
+    <ProductIdentifier>
+      <ProductIDType>15</ProductIDType>
+      <IDValue>9781386426103</IDValue>
+    </ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>EA</ProductForm>
+      <ProductFormDetail>E101</ProductFormDetail>
+      <PrimaryContentType>10</PrimaryContentType>
+      <Collection>
+        <CollectionType>10</CollectionType>
+        <TitleDetail>
+          <TitleType>01</TitleType>
+          <TitleElement>
+            <SequenceNumber>2</SequenceNumber>
+            <TitleElementLevel>02</TitleElementLevel>
+            <TitleText>Lingerie</TitleText>
+          </TitleElement>
+          <TitleElement>
+            <SequenceNumber>3</SequenceNumber>
+            <TitleElementLevel>01</TitleElementLevel>
+            <PartNumber>3</PartNumber>
+          </TitleElement>
+        </TitleDetail>
+      </Collection>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement>
+          <SequenceNumber>1</SequenceNumber>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Dame en Lingerie</TitleText>
+          <Subtitle>Lingerie, #3</Subtitle>
+        </TitleElement>
+      </TitleDetail>
+      <TitleDetail>
+        <TitleType>10</TitleType>
+        <TitleElement>
+          <TitleElementLevel>01</TitleElementLevel>
+          <TitleText>Dame en Lingerie</TitleText>
+        </TitleElement>
+      </TitleDetail>
+      <Contributor>
+        <SequenceNumber>1</SequenceNumber>
+        <ContributorRole>A01</ContributorRole>
+        <PersonName>Penelope Sky</PersonName>
+        <PersonNameInverted>Sky, Penelope</PersonNameInverted>
+      </Contributor>
+      <Language>
+        <LanguageRole>01</LanguageRole>
+        <LanguageCode>fre</LanguageCode>
+      </Language>
+      <Subject>
+        <MainSubject/>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC027020</SubjectCode>
+      </Subject>
+      <Subject>
+        <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+        <SubjectCode>FIC027110</SubjectCode>
+      </Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent>
+        <TextType>03</TextType>
+        <ContentAudience>00</ContentAudience>
+        <Text textformat="02">&lt;p&gt;Je refuse de laisser cette femme avoir de l'influence sur moi.&lt;br /&gt;&lt;br /&gt;Elle n'est que ma prisonni&amp;egrave;re.&lt;br /&gt;&lt;br /&gt;Mais si Muse &amp;eacute;tait en danger, je ferais n'importe quoi pour la sauver.&lt;br /&gt;&lt;br /&gt;N'importe quoi pour la prot&amp;eacute;ger.&lt;br /&gt;&lt;br /&gt;Elle &amp;eacute;tait cens&amp;eacute;e m'inspirer et me donner du plaisir.&lt;br /&gt;&lt;br /&gt;Elle n'&amp;eacute;tait jamais cens&amp;eacute;e m'aimer.&lt;br /&gt;&lt;br /&gt;Encore moins me donner envie de l'aimer en retour.&lt;/p&gt;</Text>
+      </TextContent>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher>
+        <PublishingRole>01</PublishingRole>
+        <PublisherName>Penelope Sky</PublisherName>
+      </Publisher>
+      <PublishingStatus>04</PublishingStatus>
+      <PublishingDate>
+        <PublishingDateRole>01</PublishingDateRole>
+        <Date>20180921</Date>
+      </PublishingDate>
+      <SalesRights>
+        <SalesRightsType>02</SalesRightsType>
+        <Territory>
+          <RegionsIncluded>WORLD</RegionsIncluded>
+        </Territory>
+      </SalesRights>
+    </PublishingDetail>
+    <ProductSupply>
+      <MarketPublishingDetail>
+        <MarketPublishingStatus>04</MarketPublishingStatus>
+        <MarketDate>
+          <MarketDateRole>01</MarketDateRole>
+          <Date>20180921</Date>
+        </MarketDate>
+      </MarketPublishingDetail>
+      <SupplyDetail>
+        <Supplier>
+          <SupplierRole>03</SupplierRole>
+          <SupplierName>Draft2Digital, LLC</SupplierName>
+        </Supplier>
+        <ProductAvailability>20</ProductAvailability>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceAmount>19.99</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+        <Price>
+          <PriceType>01</PriceType>
+          <PriceQualifier>06</PriceQualifier>
+          <PriceTypeDescription>CPC for Libraries</PriceTypeDescription>
+          <PriceAmount>2.00</PriceAmount>
+          <CurrencyCode>USD</CurrencyCode>
+          <Territory>
+            <RegionsIncluded>WORLD</RegionsIncluded>
+          </Territory>
+        </Price>
+      </SupplyDetail>
+    </ProductSupply>
+  </Product>
+</ONIXMessage>

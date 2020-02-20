@@ -120,9 +120,9 @@ def processONIX(fileName):
 def postBooks(books):
     serializer_class = BookSerializer
     invalid_books = []
+    print("Posting...")
     for book in books:
         bookData = BookSerializer(data=book)
-        print("Posting...")
         try:
             existingBook = Book.objects.get(isbn_13=book["isbn_13"])
 
@@ -170,21 +170,24 @@ class search(ListView):
         data['query'] = self.request.GET.get('q')
         return data
 
-class ProcessBook(APIView):
+class IngestBook(APIView):
     serializer_class = BookSerializer
 
-    def get(self, request):      
+    def post(self, request):      
         try:
-            onix_file = self.request.query_params["filepath"]
+            onix_file = self.request.POST.get("filepath")
             fileSave = LastONIXFile.objects.get()
             fileSave.file_path = onix_file
             fileSave.save()
         except:
-            onix_file = self.request.query_params["filepath"]
+            onix_file = self.request.POST.get("filepath")
             fileSave = LastONIXFile(file_path=onix_file)
             fileSave.save()
             onix_file = fileSave.file_path
         return HttpResponse(onix_file)
+
+class ProcessBook(APIView):
+    serializer_class = BookSerializer
         
     def put(self, request):
         response = "Books added successfully"
