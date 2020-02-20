@@ -24,7 +24,7 @@
     {% endif %}
 </div>
 <div class = "boxlist">
-    <h4>Description: {{book.clean_description}}</h4>
+    <h4>Description: {{book.description|safe}}</h4>
 </div>
 </ul>
 {% if book.ready_for_sale %}
