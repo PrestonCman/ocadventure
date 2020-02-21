@@ -21,12 +21,6 @@ class Book(models.Model):
     other_authors = models.CharField(max_length=300,null=True, blank = True)
     class Meta:
         ordering = ['title']
-    
-    def clean_description(self):
-        doc = html.fromstring(self.description)
-        cleaner = html_cleaner.Cleaner(style=True)
-        doc = cleaner.clean_html(doc)
-        return doc.text_content()
         
     def __str__(self):
        return self.title
