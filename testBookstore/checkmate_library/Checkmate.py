@@ -1,19 +1,30 @@
-import json
+class SiteBookData():
+    def __init__(self,content):
+        self.content = content
+        self.BookDictionary = BookDictionary
+    
+    #In this dictionary it doesnt have "extra"
+    self.BookDictionary = { 'book_format' : None, 'book_title' : None, 'isbn_13' : None, 'description' : None, 'series' : None, 'volume_number' : None, 'subtitle' : None, 'authors' : None, 'book_id' : None, 'site_slug' : None,
+    'book_id' : None, 'url' : None, 'ready_for_sale' : None}
 
-class SiteBookData():           #SiteBookData Class
-    def __init__(self):
-        pass
+    #Here we need to give the value to dictionary. USing the parser.
+    #for key in dictionary:
+     #   key = getInfo(key)
 
 
 
 class book_site():
     def __init__(self, slug):
-        with open('parsers.json') as parserList:
-            parsers = json.load(parserList)
-    
+        pass
+
+        url = {
+            #slug : (url, parser)
+            "amazon-books/b?ie=UTF8&node=132" : ("https://www.amazon.com/amazon-books/b?ie=UTF8&node=13270229011", None)        #Not Final
+        }
+
         self.slug = slug
-        self.parser = parsers[slug]
-        #pass queries to self.parser
+        self.Siteurl = url[slug][0]
+        self.parser = url[slug][1]
 
     def get_book_data_from_site(self, url):
         """Given a string URL to a book page at a site, 
