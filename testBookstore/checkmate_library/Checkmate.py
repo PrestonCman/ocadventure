@@ -1,3 +1,5 @@
+import json
+
 class SiteBookData():           #SiteBookData Class
     def __init__(self):
         pass
@@ -6,16 +8,12 @@ class SiteBookData():           #SiteBookData Class
 
 class book_site():
     def __init__(self, slug):
-        pass
-
-        url = {
-            #slug : (url, parser)
-            "amazon-books/b?ie=UTF8&node=132" : ("https://www.amazon.com/amazon-books/b?ie=UTF8&node=13270229011", None)        #Not Final
-        }
-
+        with open('parsers.json') as parserList:
+            parsers = json.load(parserList)
+    
         self.slug = slug
-        self.Siteurl = url[slug][0]
-        self.parser = url[slug][1]
+        self.parser = parsers[slug]
+        #pass queries to self.parser
 
     def get_book_data_from_site(self, url):
         """Given a string URL to a book page at a site, 
