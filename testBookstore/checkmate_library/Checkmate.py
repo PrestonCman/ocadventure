@@ -4,8 +4,8 @@ class SiteBookData():
       
     
     #In this dictionary it doesnt have "extra"
-    BookDictionary = { 'book_format' : None, 'book_title' : None, 'isbn_13' : None, 'description' : None, 'series' : None, 'volume_number' : None, 'subtitle' : None, 'authors' : None, 'book_id' : None, 'site_slug' : None,
-    'book_id' : None, 'url' : None, 'ready_for_sale' : None}
+        self.bookDictionary = { 'book_format' : None, 'book_title' : None, 'isbn_13' : None, 'description' : None, 'series' : None, 'volume_number' : None, 'subtitle' : None, 'authors' : None, 'site_slug' : None,
+        'book_id' : None, 'url' : None, 'ready_for_sale' : None}
 
     #Here we need to give the value to dictionary. USing the parser.
     #for key in dictionary:
