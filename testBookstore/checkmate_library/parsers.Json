@@ -1,6 +1,7 @@
 {
     "TB" : {
         "format" : null,
+        "site_url" : "localhost:8080/store/search/",
         "book_title" : null,
         "book_image" : null,
         "book_image_url" : null,
@@ -17,6 +18,7 @@
     },
     "KB" : {
         "format" : null,
+        "site_url" : "https://www.kobo.com/us/en/ebook/",
         "book_title" : null,
         "book_image" : null,
         "book_image_url" : null,
@@ -33,6 +35,7 @@
     },
     "GB" : {
         "format" : null,
+        "site_url" : "https://books.google.com/books",
         "book_title" : null,
         "book_image" : null,
         "book_image_url" : null,
@@ -49,6 +52,7 @@
     },
     "SD" : {
         "format" : null,
+        "site_url" : "https://www.scribd.com/book/",
         "book_title" : "//h1[@class='document_title']",
         "book_image" : null,
         "book_image_url" : null,
@@ -65,16 +69,17 @@
     },
     "LC" : {
         "format" : null,
-        "book_title" : null,
+        "sit_url" : "https://www3.livrariacultura.com.br/",
+        "book_title" : "//h1[@class='title_product']/div",
         "book_image" : null,
-        "book_image_url" : null,
-        "isbn_13" : null,
-        "description" : null,
+        "book_image_url" : "//img[@id='image-main']/@src",
+        "isbn_13" : "//li[@id='ISBN'",
+        "description" : "",
         "series" : null,
         "volume_number" : null,
         "subtitle" : null,
         "authors" : null,
-        "book_id" : null,
+        "book_id" : "test",
         "content" : null,
         "ready_for_sale" : null,
         "extra" : {}
