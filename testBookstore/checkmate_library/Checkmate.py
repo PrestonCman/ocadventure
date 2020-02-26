@@ -1,22 +1,25 @@
-class SiteBookData():
-    def __init__(self,content):
-        self.content = content
-      
-    
-    #In this dictionary it doesnt have "extra"
-        self.bookDictionary = { 'book_format' : None, 'book_title' : None, 'isbn_13' : None, 'description' : None, 'series' : None, 'volume_number' : None, 'subtitle' : None, 'authors' : None, 'site_slug' : None,
-        'book_id' : None, 'url' : None, 'ready_for_sale' : None}
+import io
+from lxml import etree
+import requests
 
-    #Here we need to give the value to dictionary. USing the parser.
-    #for key in dictionary:
-     #   key = getInfo(key)
+class SiteBookData():           #SiteBookData Class
+    def __init__(self):
+        pass
 
 
 
 class book_site():
     def __init__(self, slug):
-        with open('parsers.json') as parserList:
-            parsers = json.load(parserList)
+        pass
+
+        url = {
+            #slug : (url, parser)
+            "TB" : None, #test bookstore
+            "KB" : None,  #Kobo
+            "GB" : None, #Google Books
+            "SD" : None, #Scribd
+            "LC" : None #Lavraria
+        }
 
         self.slug = slug
         self.parser = parsers[slug]
