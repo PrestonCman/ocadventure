@@ -7,8 +7,9 @@ from Checkmate import *
 import io
 from lxml import etree
 import requests
+from time import process_time
 
-urls = ["https://www.scribd.com/book/249308926/1984", "https://www.scribd.com/book/322011391/The-Subtle-Art-of-Not-Giving-a-F-ck-A-Counterintuitive-Approach-to-Living-a-Good-Life", "https://www.scribd.com/book/262747675/A-Wrinkle-in-Time-The-Graphic-Novel"]
+urls = ["https://www.scribd.com/book/249308926/1984", "https://www.scribd.com/book/322011391/The-Subtle-Art-of-Not-Giving-a-F-ck-A-Counterintuitive-Approach-to-Living-a-Good-Life", "https://www.scribd.com/book/262747675/A-Wrinkle-in-Time-The-Graphic-Novel", "https://www.scribd.com/book/249307564/The-Fellowship-of-the-Ring-Being-the-First-Part-of-The-Lord-of-the-Rings"]
 
 
 def fetch(url):
@@ -24,24 +25,22 @@ def parse(content, query):
 
     parsed = root.xpath(query)
     print(len(parsed))
-    return parsed[0].text
+    #print(parsed)
+    for text in parsed:
+        print(text.text)
 
 
 def main():
-    #query = "//span[@itemprop='author']/a"
-    #query = "//td[@class = 'line-content']/following-sibling"
-    ##query = "//tr/td[@class='line-content']/span[@class='html-attribute-value']"
-    query = "//span[@class='meta_label'][3]/span[2]"#[span = 'ISBN: ']"
+    query = "//script"
     for url in urls:
         content = fetch(url)
         try:
-            print(parse(content, query))
+            parse(content, query)
         except Exception as e:
             print("Error on  : " + url)
             print(type(e))
             print(e.args)
             print(e)
-
 
 
 main()
