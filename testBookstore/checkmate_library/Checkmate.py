@@ -1,8 +1,15 @@
-import json
+class SiteBookData():
+    def __init__(self,content):
+        self.content = content
+      
+    
+    #In this dictionary it doesnt have "extra"
+        self.bookDictionary = { 'book_format' : None, 'book_title' : None, 'isbn_13' : None, 'description' : None, 'series' : None, 'volume_number' : None, 'subtitle' : None, 'authors' : None, 'site_slug' : None,
+        'book_id' : None, 'url' : None, 'ready_for_sale' : None}
 
-class SiteBookData():           #SiteBookData Class
-    def __init__(self):
-        pass
+    #Here we need to give the value to dictionary. USing the parser.
+    #for key in dictionary:
+     #   key = getInfo(key)
 
 
 
