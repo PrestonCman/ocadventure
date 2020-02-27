@@ -15,20 +15,18 @@ class SiteBookData():
 
 class book_site():
     def __init__(self, slug):
-        pass
-
-        url = {
-            #slug : (url, parser)
-            "amazon-books/b?ie=UTF8&node=132" : ("https://www.amazon.com/amazon-books/b?ie=UTF8&node=13270229011", None)        #Not Final
-        }
+        with open('parsers.json') as parserList:
+            parsers = json.load(parserList)
 
         self.slug = slug
-        self.Siteurl = url[slug][0]
-        self.parser = url[slug][1]
+        self.parser = parsers[slug]
+        self.site_url = self.parser["site-url"]
+        #pass queries to self.parser
 
     def get_book_data_from_site(self, url):
         """Given a string URL to a book page at a site, 
         parse it and return the siteBookData of the info"""
+        
         pass
 
     def find_book_matches_at_site(self, book_data):
@@ -42,10 +40,14 @@ class book_site():
 
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
-        pass
+        url = self.site_url + self.book_id
+        if self.slug == "LC":
+            url += "/p"
+        return url
 
 
 
-def Get_book_site(slug):
+def get_book_site(slug):
     """Function that takes a string and returns a booksite url"""
+    
     return book_site(slug)
