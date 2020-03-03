@@ -44,7 +44,7 @@
         "series" : null,
         "volume_number" : null,
         "subtitle" : null,
-        "authors" : ".//td[span='Author']/following-sibling::td[1]//span",
+        "authors" : ".//td[span='Author' or span='Authors' or span='Illustrated by']/following-sibling::td[1]//span",
         "book_id" : null,
         "ready_for_sale" : ".//p[@id='gb-get-book-not-available']/text()",
         "extra" : {}

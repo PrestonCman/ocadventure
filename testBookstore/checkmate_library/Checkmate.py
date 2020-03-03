@@ -49,13 +49,6 @@ class site_book_data():
                 for author in parsed:
                     authors.append(author.text)
                 self.book_dictionary["authors"] = authors
-            else:
-                parsed = root.xpath(".//td[span='Illustrated by']/following-sibling::td[1]//span")
-                if len(parsed) != 0:
-                    for author in parsed:
-                        authors.append(author.text)
-                    print(authors)
-                    self.book_dictionary["authors"] = authors
 
             self.book_dictionary["site_slug"] = "GB"
             self.book_dictionary["url"] = url
