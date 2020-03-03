@@ -242,6 +242,39 @@ class site_book_data():
 
         return self
 
+    def parse_TB(self,parser,url):
+        parse = etree.HTMLParser(remove_pis=True)
+        tree = etree.parse(io.BytesIO(self.content),parse)
+        root = tree.getroot()
+
+        title_element = root.xpath(parser["book_title"])[0]
+        self.book_dictionary["book_title"] = title_element.txt
+
+        isbn_element = root.xpath(parser["isbn_13"])[0]
+        self.book_dictionary["isbn_13"] = isbn_element.txt
+
+        description_element = root.xpath(parser["description"])[0]
+        self.book_dictionary["description"] = description_element.txt
+
+        author_element = root.xpath(parser["authors"])[0]
+        self.book_dictionary["authors"] = author_element.txt
+
+        series_element = root.xpath(parser["series"])[0]
+        self.book_dictionary["series"] = series_element.txt
+
+        volume_element = root.xpath(parser["volume_number"])[0]
+        self.book_dictionary["volume_number"] = volume_element.txt
+
+        self.book_dictionary["site_slug"] = "TB"
+        self.book_dictionary["url"] = url
+
+        ready_element = root.xpath(parser["ready_for_sale"])[0]
+        if ready_element.txt == 'This book is ready for sale!':
+            self.book_dictionary["ready_for_sale"] = True
+        else:
+            self.book_dictionary["ready_for_sale"] = False
+        return self
+
 class book_site():
     def __init__(self, slug):
         with open("parsers.json") as parserList:
@@ -249,7 +282,7 @@ class book_site():
 
         self.slug = slug
         self.parser = parsers[slug]
-        self.site_url = self.parser["site_url"]
+        self.site_url = self.parser["site-url"]
         #pass queries to self.parser
 
     def get_book_data_from_site(self, url):
@@ -267,6 +300,8 @@ class book_site():
             return book_data.parse_LC(self.parser, url)
         elif (self.slug == "KB"):
             return book_data.parse_KB(self.parser, url)
+        elif (self.slug == "TB"):
+            return book_data.parse_TB(self.parser, url)
 
    
 
@@ -281,6 +316,7 @@ class book_site():
 
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
+        book_id = self,book_id
         url = self.site_url + book_id
         if self.slug == "LC":
             url += "/p"
