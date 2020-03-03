@@ -26,6 +26,7 @@ class site_book_data():
             'url' : None,
             'ready_for_sale' : None,
             'book_image' : None,
+            'extra' : None,
             }
 
     def parse_GB(self, parser, url):
@@ -92,7 +93,7 @@ class site_book_data():
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
-                if(parser[key] == "!Not_Reachable"):
+                if(parser[key] == "!Not_Reachable" or key == "site_url"):
                     pass
                     #not parsable/readable content
                 elif(key == "description" or key == "book_image_url"):
@@ -106,12 +107,8 @@ class site_book_data():
                     end = myUrl.path.rfind('/')
                     self.book_dictionary[key] = myUrl.path[6:end]
                     #parse url for bookID
-                elif(key == "site_url"):
-                    self.book_dictionary[key] = parser[key]
-                    #immediately hand over site url
                 elif(key == "extra"):
-                    for extraKey in parser[key]:
-                        query = parser[key][extraKey]
+                    self.book_dictionary[key] = parser[key]
                         #call any functions for additionaly queries here
                 else:
                     parsed = root.xpath(parser[key])
