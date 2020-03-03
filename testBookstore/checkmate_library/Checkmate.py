@@ -86,11 +86,13 @@ class site_book_data():
 
 
     def parse_SD(self, parser, url):
+        self.book_dictionary["site_slug"] = "SD"
+        self.book_dictionary["url"] = url
         temp_parse = etree.HTMLParser(remove_pis=True)
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
-                if(parser[key] == "!Not_Reachable" or key == "content" or key == "site_url"):
+                if(parser[key] == "!Not_Reachable"):
                     pass
                     #not parsable/readable content
                 elif(key == "description" or key == "book_image_url"):
