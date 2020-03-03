@@ -43,5 +43,7 @@ def main():
             print(e)
 
 
-main()
-
+#main()
+site = book_site("SD")
+site_book_data = site.get_book_data_from_site("https://www.scribd.com/book/170472413/The-Berenstain-Bears-Show-Some-Respect")
+print(site_book_data.book_dictionary)
