@@ -5,7 +5,7 @@ import requests
 from urllib.parse import urlparse, parse_qs
 from PIL import Image
 
-class SiteBookData():
+class site_book_data():
     def __init__(self,content):
         self.content = content
       
@@ -55,9 +55,11 @@ class SiteBookData():
             parsed = root.xpath(parser["ready_for_sale"])
             if len(parsed) != 0:
                 if parsed[0] == 'No eBook available':
-                    self.book_dictionary['ready_for_sale'] = False
+                    self.book_dictionary["ready_for_sale"] = False
+                    self.book_dictionary["format"] = "Print"
             else:
-                self.book_dictionary['ready_for_sale'] = True
+                self.book_dictionary["ready_for_sale"] = True
+                self.book_dictionary["format"] = "eBook" 
 
             return self 
                 
@@ -84,7 +86,7 @@ class book_site():
         if self.slug == "GB":
             response = requests.get(url)
             content = response.content
-            book_data = SiteBookData(content)
+            book_data = site_book_data(content)
             return book_data.parse_GB(self.parser, url)
 
     def find_book_matches_at_site(self, book_data):
