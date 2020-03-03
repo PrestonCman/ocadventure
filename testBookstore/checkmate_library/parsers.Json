@@ -67,7 +67,7 @@
     },
     "LC" : {
         "format" : null,
-        "sit_url" : "https://www3.livrariacultura.com.br/",
+        "site_url" : "https://www3.livrariacultura.com.br/",
         "book_title" : "//h1[@class='title_product']/div",
         "book_image" : null,
         "book_image_url" : "//img[@id='image-main']/@src",

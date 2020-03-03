@@ -1,17 +1,14 @@
-import io
 import json
+import io
 from lxml import etree
 import requests
 from urllib.parse import urlparse, parse_qs
 from PIL import Image
 
-
 class site_book_data():
     def __init__(self,content):
         self.content = content
-      
-    
-    #In this dictionary it doesnt have "extra"
+        
         self.book_dictionary = { 
             'format' : None, 
             'book_title' : None, 
@@ -84,7 +81,7 @@ class site_book_data():
                     self.book_dictionary["format"] = "Print"
             else:
                 self.book_dictionary["ready_for_sale"] = True
-                self.book_dictionary["format"] = "eBook" 
+                self.book_dictionary["format"] = "eBook"
 
             return self
 
@@ -141,13 +138,11 @@ class book_site():
 
         book_data = site_book_data(content)
         if self.slug == "GB":
-            book_data = site_book_data(content)
             return book_data.parse_GB(self.parser, url)
         elif(self.slug == "SD"):
-            book_data.parse_SD(self.parser, url)
             return book_data.parse_SD(self.parser, url)
 
-    
+   
 
     def find_book_matches_at_site(self, book_data):
         """Given a sitebookData object, search for the book 
