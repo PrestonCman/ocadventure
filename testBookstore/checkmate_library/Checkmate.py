@@ -15,17 +15,20 @@ class site_book_data():
         self.book_dictionary = { 
             'format' : None, 
             'book_title' : None, 
+            'book_image' : None,
+            'book_image_url' : None,
             'isbn_13' : None, 
             'description' : None, 
             'series' : None, 
             'volume_number' : None, 
             'subtitle' : None, 
             'authors' : None, 
+            'book_id' : None,
             'site_slug' : None,
-            'book_id' : None, 
+            'parse_status' : None,
             'url' : None,
+            #'content' : self.content,
             'ready_for_sale' : None,
-            'book_image' : None,
             'extra' : None,
             }
 
