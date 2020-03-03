@@ -38,10 +38,24 @@ class site_book_data():
             parsed = root.xpath(parser["description"])
             if len(parsed) != 0:
                 self.book_dictionary["description"] = parsed[0]
+            else:
+                parsed = root.xpath(".//div[@id='synopsistext']/text()")
+                if len(parsed) != 0:
+                    self.book_dictionary["description"] = parsed[0]
 
             parsed = root.xpath(parser["authors"])
+            authors = list()
             if len(parsed) != 0:
-                self.book_dictionary["authors"] = parsed[0].text
+                for author in parsed:
+                    authors.append(author.text)
+                self.book_dictionary["authors"] = authors
+            else:
+                parsed = root.xpath(".//td[span='Illustrated by']/following-sibling::td[1]//span")
+                if len(parsed) != 0:
+                    for author in parsed:
+                        authors.append(author.text)
+                    print(authors)
+                    self.book_dictionary["authors"] = authors
 
             self.book_dictionary["site_slug"] = "GB"
             self.book_dictionary["url"] = url
