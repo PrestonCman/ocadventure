@@ -8,11 +8,26 @@ from PIL import Image
 class site_book_data():
     def __init__(self,content):
         self.content = content
-      
-    
-    #In this dictionary it doesnt have "extra"
-        self.book_dictionary = { 'format' : None, 'book_title' : None, 'isbn_13' : None, 'description' : None, 'series' : None, 'volume_number' : None, 'subtitle' : None, 'authors' : None, 'site_slug' : None,
-        'book_id' : None, 'url' : None, 'ready_for_sale' : None, 'book_image' : None, 'book_image_url' : None, 'extra' : None}
+        
+        self.book_dictionary = { 
+            'format' : None, 
+            'book_title' : None, 
+            'book_image' : None,
+            'book_image_url' : None,
+            'isbn_13' : None, 
+            'description' : None, 
+            'series' : None, 
+            'volume_number' : None, 
+            'subtitle' : None, 
+            'authors' : None, 
+            'book_id' : None,
+            'site_slug' : None,
+            'parse_status' : None,
+            'url' : None,
+            #'content' : self.content,
+            'ready_for_sale' : None,
+            'extra' : None,
+            }
 
     def parse_GB(self, parser, url):
             temp_parse = etree.HTMLParser(remove_pis=True)
@@ -66,19 +81,48 @@ class site_book_data():
                     self.book_dictionary["format"] = "Print"
             else:
                 self.book_dictionary["ready_for_sale"] = True
-                self.book_dictionary["format"] = "eBook" 
+                self.book_dictionary["format"] = "eBook"
 
-            return self 
-                
-    #Here we need to give the value to dictionary. USing the parser.
-    #for key in dictionary:
-     #   key = getInfo(key)
+            return self
 
+
+    def parse_SD(self, parser, url):
+        self.book_dictionary["site_slug"] = "SD"
+        self.book_dictionary["url"] = url
+        temp_parse = etree.HTMLParser(remove_pis=True)
+        tree=etree.parse(io.BytesIO(self.content),temp_parse)
+        root=tree.getroot()
+        for key in parser:
+                if(parser[key] == "!Not_Reachable" or key == "site_url"):
+                    pass
+                    #not parsable/readable content
+                elif(key == "description" or key == "book_image_url"):
+                    parsed = root.xpath(parser[key])
+                    self.book_dictionary[key] = parsed[0]
+                elif(key == "book_image"):
+                    resp = requests.get(self.book_dictionary["book_image_url"], stream=True).raw
+                    self.book_dictionary[key] = Image.open(resp)
+                elif(key == "book_id"):
+                    myUrl = urlparse(url)
+                    end = myUrl.path.rfind('/')
+                    self.book_dictionary[key] = myUrl.path[6:end]
+                    #parse url for bookID
+                elif(key == "extra"):
+                    self.book_dictionary[key] = parser[key]
+                        #call any functions for additionaly queries here
+                else:
+                    parsed = root.xpath(parser[key])
+                    p = []
+                    for elem in parsed:
+                        p.append(elem.text)
+                    self.book_dictionary[key] = p
+                    #parse as normal
+        return self
 
 
 class book_site():
     def __init__(self, slug):
-        with open('parsers.json') as parserList:
+        with open("parsers.json") as parserList:
             parsers = json.load(parserList)
 
         self.slug = slug
@@ -89,12 +133,16 @@ class book_site():
     def get_book_data_from_site(self, url):
         """Given a string URL to a book page at a site, 
         parse it and return the siteBookData of the info"""
-        
+
+        content = requests.get(url).content
+
+        book_data = site_book_data(content)
         if self.slug == "GB":
-            response = requests.get(url)
-            content = response.content
-            book_data = site_book_data(content)
             return book_data.parse_GB(self.parser, url)
+        elif(self.slug == "SD"):
+            return book_data.parse_SD(self.parser, url)
+
+   
 
     def find_book_matches_at_site(self, book_data):
         """Given a sitebookData object, search for the book 
@@ -118,3 +166,4 @@ def get_book_site(slug):
     """Function that takes a string and returns a booksite url"""
     
     return book_site(slug)
+
