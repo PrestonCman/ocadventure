@@ -61,7 +61,7 @@
         "volume_number" : "!Not_Reachable",
         "subtitle" : "!Not_Reachable",
         "authors" : "//span[@itemprop='author']/a",
-        "book_id" : "//script",
+        "book_id" : null,
         "ready_for_sale" : "!Not_Reachable",
         "extra" : {}
     },

@@ -90,7 +90,7 @@ class site_book_data():
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
-                if(parser[key] == "!Not_Reachable"):
+                if(parser[key] == "!Not_Reachable" or key == "content" or key == "site_url"):
                     pass
                     #not parsable/readable content
                 elif(key == "description" or key == "book_image_url"):
@@ -138,15 +138,12 @@ class book_site():
         content = requests.get(url).content
 
         book_data = site_book_data(content)
-        book_data.book_dictionary["content"] = content
         if self.slug == "GB":
             book_data = site_book_data(content)
             return book_data.parse_GB(self.parser, url)
         elif(self.slug == "SD"):
             book_data.parse_SD(self.parser, url)
             return book_data.parse_SD(self.parser, url)
-
-        return book_data
 
     
 
