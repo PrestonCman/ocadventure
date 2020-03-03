@@ -282,7 +282,7 @@ class book_site():
 
         self.slug = slug
         self.parser = parsers[slug]
-        self.site_url = self.parser["site-url"]
+        self.site_url = self.parser["site_url"]
         #pass queries to self.parser
 
     def get_book_data_from_site(self, url):
