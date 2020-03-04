@@ -67,23 +67,60 @@ class site_book_data():
 
             self.book_dictionary["site_slug"] = "GB"
             self.book_dictionary["url"] = url
+      
 
-            parsed = urlparse(url)
-            #print(parsed)
-            query = parse_qs(parsed.query)
-            #print(query)
-            self.book_dictionary["book_id"] = query["id"][0]
-            
+    #Here we need to give the value to dictionary. USing the parser.
+    #for key in dictionary:
+    #   key = getInfo(key)
+
+    def parse_LC(self, parser, url):
+    """ Parsing function for Livraria Cultura eBook store.  Given a parser JSON object and the url 
+    of the book to be parsed, will return a parsed site book data object"""
+
+        temp_parse=etree.HTMLParser(remove_pis=True)
+        tree=etree.parse(io.BytesIO(self.content),temp_parse)
+        root=tree.getroot()
+        try:
+            self.book_dictionary["format"] = "ebook"
+
+            parsed = root.xpath(parser["book_title"])
+            if len(parsed) != 0:
+                self.book_dictionary["book_title"] = parsed[0]
+
+            parsed = root.xpath(parser["book_image"])
+            if len(parsed) != 0:
+                self.book_dictionary["book_image_url"] = parsed[0]
+                resp = requests.get(parsed[0], stream=True).raw
+                self.book_dictionary["book_image"] = Image.open(resp)   
+
+            parsed = root.xpath(parser["isbn_13"])
+            print(parsed)
+            if len(parsed) != 0:
+                self.book_dictionary["isbn_13"] = parsed[0]
+
+            parsed = root.xpath(parser["description"])
+            if len(parsed) != 0:
+                self.book_dictionary["description"] = parsed[0]
+
+            self.book_dictionary["book_id"] = url[36: len(url)-2]
+
+            parsed = root.xpath(parser["authors"])
+            if len(parsed) != 0:
+                self.book_dictionary["authors"] = parsed
+
             parsed = root.xpath(parser["ready_for_sale"])
             if len(parsed) != 0:
-                if parsed[0] == 'No eBook available':
-                    self.book_dictionary["ready_for_sale"] = False
-                    self.book_dictionary["format"] = "Print"
-            else:
                 self.book_dictionary["ready_for_sale"] = True
-                self.book_dictionary["format"] = "eBook"
+            else:
+                self.book_dictionary["ready_for_sale"] = False
 
-            return self
+            self.book_dictionary["sight_slug"] = "LC"
+            self.book_dictionary["url"] = parser["site_url"]
+            self.book_dictionary["parse_status"] = "Success"
+        except:
+            self.book_dictionary["parse_status"] = "Failed"
+        
+        return self
 
 
     def parse_SD(self, parser, url):
@@ -141,6 +178,8 @@ class book_site():
             return book_data.parse_GB(self.parser, url)
         elif(self.slug == "SD"):
             return book_data.parse_SD(self.parser, url)
+        elif(self.slug == "LC"):
+            return book_data.parse_LC(self.parser, url)
 
    
 
@@ -159,7 +198,7 @@ class book_site():
         if self.slug == "LC":
             url += "/p"
         return url
-
+    
 
 
 def get_book_site(slug):
