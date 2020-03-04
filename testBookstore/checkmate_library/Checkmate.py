@@ -80,6 +80,8 @@ class site_book_data():
         temp_parse=etree.HTMLParser(remove_pis=True)
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
+
+        #tries to parse all information from given book url
         try:
             self.book_dictionary["format"] = "ebook"
 
@@ -118,6 +120,7 @@ class site_book_data():
             self.book_dictionary["url"] = parser["site_url"]
             self.book_dictionary["parse_status"] = "Success"
         except:
+            # if failed, the site book data object will be given a parsed value of "Failed"
             self.book_dictionary["parse_status"] = "Failed"
         
         return self
