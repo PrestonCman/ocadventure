@@ -74,9 +74,8 @@ class site_book_data():
     #   key = getInfo(key)
 
     def parse_LC(self, parser, url):
-    """ Parsing function for Livraria Cultura eBook store.  Given a parser JSON object and the url 
-    of the book to be parsed, will return a parsed site book data object"""
-
+        """Parsing function for Livraria Cultura eBook store.  Given a parser JSON
+        object and the url of the book to be parsed, will return a parsed site book data object"""
         temp_parse=etree.HTMLParser(remove_pis=True)
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
@@ -96,7 +95,6 @@ class site_book_data():
                 self.book_dictionary["book_image"] = Image.open(resp)   
 
             parsed = root.xpath(parser["isbn_13"])
-            print(parsed)
             if len(parsed) != 0:
                 self.book_dictionary["isbn_13"] = parsed[0]
 
@@ -108,7 +106,12 @@ class site_book_data():
 
             parsed = root.xpath(parser["authors"])
             if len(parsed) != 0:
-                self.book_dictionary["authors"] = parsed
+                authors = parsed[0].split("|")
+                parsedAuthors = []
+                for author in authors:
+                    parsedAuthors.append(author[6:len(author)-1])
+                
+                self.book_dictionary["authors"] = parsedAuthors
 
             parsed = root.xpath(parser["ready_for_sale"])
             if len(parsed) != 0:
@@ -116,7 +119,7 @@ class site_book_data():
             else:
                 self.book_dictionary["ready_for_sale"] = False
 
-            self.book_dictionary["sight_slug"] = "LC"
+            self.book_dictionary["site_slug"] = "LC"
             self.book_dictionary["url"] = parser["site_url"]
             self.book_dictionary["parse_status"] = "Success"
         except:

@@ -68,7 +68,7 @@
     "LC" : {
         "format" : "ebook",
         "site_url" : "https://www3.livrariacultura.com.br/",
-        "book_title" : "//h1[@class='title_product']/div",
+        "book_title" : "//h1[@class='title_product']/div/text()",
         "book_image" : "//img[@id='image-main']/@src",
         "book_image_url" : "//img[@id='image-main']/@src",
         "isbn_13" : "//td[@class='value-field ISBN']/text()",

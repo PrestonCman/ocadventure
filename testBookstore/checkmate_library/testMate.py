@@ -45,7 +45,7 @@ def parse(content, query):
 
 def main():
     site = book_site("LC")
-    site_book_data = site.get_book_data_from_site("https://www3.livrariacultura.com.br/as-mentiras-mais-contadas-e-que-todo-mundo-2012250588/p")
+    site_book_data = site.get_book_data_from_site("https://www3.livrariacultura.com.br/berenstain-bears-thank-god-for-good-health-111826738/p")
     print(site_book_data.book_dictionary)
         
 main()
