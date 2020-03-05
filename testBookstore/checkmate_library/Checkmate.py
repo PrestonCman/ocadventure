@@ -170,7 +170,7 @@ class site_book_data():
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
-            try:
+            #try:
                 if (parser[key] == "!Not_Reachable" or key == "site_url"):
                     pass
                     #not parsable/readable content
@@ -195,6 +195,12 @@ class site_book_data():
                 elif (key == "book_image"):
                     resp = requests.get("http:" + self.book_dictionary["book_image_url"], stream=True).raw
                     self.book_dictionary[key] = Image.open(resp)
+                elif (key == "isbn_13"):
+                    parsed = root.xpath(parser[key])
+                    for element in parsed:
+                        if element.text == "ISBN: ":
+                            isbn = element.xpath("./span")
+                            self.book_dictionary[key] = isbn[0].text
                 elif (key == "description"):
                     parsed = root.xpath(parser[key])
                     description = ""
@@ -227,9 +233,9 @@ class site_book_data():
                     self.book_dictionary[key] = parser[key]
                 else:
                     self.book_dictionary[key] = root.xpath(parser[key])[0].text
-            except:
-               self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
-               break
+            #except:
+             #  self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
+            #   break
             
         if self.book_dictionary["parse_status"] != "UNSUCCESSFUL":
             self.book_dictionary["parse_status"] = "PARSE_SUCCESSFUL"
@@ -278,6 +284,11 @@ class book_site():
         url = self.site_url + book_id
         if self.slug == "LC":
             url += "/p"
+        elif self.slug == "KB":
+            if requests.get(self.site_url + "ebook/" + book_id).status_code == 200:
+                url = self.site_url + "ebook/" + book_id
+            else:
+                url = self.site_url + "audiobook/" + book_id
         return url
     
 
