@@ -28,7 +28,7 @@
         "volume_number" : "!Not_Reachable",
         "subtitle" : "//span[@class='subtitle product-field']",
         "authors" : "//span[@class='authors product-field contributor-list']/span/a",
-        "book_id" : "//div[@class='item-primary-metadata book-primary-metadata' or @class='item-primary-metadata ']/@data-track-info",
+        "book_id" : null,
         "ready_for_sale" : "//button[@class='purchase-action add-to-cart']/span",
         "extra" : {}
     },

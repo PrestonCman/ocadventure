@@ -208,9 +208,9 @@ class site_book_data():
                         description += element
                     self.book_dictionary[key] = description
                 elif (key == "book_id"):
-                    parsed = root.xpath(parser[key])
-                    book_id = parsed[0]
-                    self.book_dictionary[key] = book_id[book_id.find(":")+2:-2]
+                    myUrl = urlparse(url)
+                    end = myUrl.path.rfind('/')
+                    self.book_dictionary[key] = myUrl.path[end+1:]
                 elif (key == "authors"):
                     parsed = root.xpath(parser[key])
                     authors = []
