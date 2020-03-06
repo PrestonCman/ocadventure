@@ -11,7 +11,7 @@
         "volume_number" : "substring-after(//h4[@id='volume']/text(),':')",
         "subtitle" : null,
         "authors" : "substring-after(//h2[@id='author']/text(),':')",
-        "book_id" : null,
+        "book_id" : "substring-after(//meta/@content, 'search/')",
         "content" : null,
         "ready_for_sale" : "//h2[@id='ready_for_sale']/text()",
         "extra" : {}
