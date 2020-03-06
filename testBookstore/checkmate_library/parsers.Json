@@ -1,20 +1,21 @@
 {
     "TB" : {
         "format" : null,
-        "site_url" : "localhost:8080/store/search/",
-        "book_title" : null,
+        "site_url" : "localhost:8080/store/search",
+        "book_title" : "//h1[@class='title']",
         "book_image" : null,
         "book_image_url" : null,
-        "isbn_13" : null,
-        "description" : null,
-        "series" : null,
-        "volume_number" : null,
+        "isbn_13" : "substring-after(//h4[@id='isbn']/text(),':')",
+        "description" : "substring-after(//div[@id='description'],':')",
+        "series" : "substring-after(//h4[@id='series'],':')",
+        "volume_number" : "substring-after(//h4[@id='volume']/text(),':')",
         "subtitle" : null,
-        "authors" : null,
+        "authors" : "substring-after(//h2[@id='author']/text(),':')",
         "book_id" : null,
         "content" : null,
-        "ready_for_sale" : null,
+        "ready_for_sale" : "//h2[@id='ready_for_sale']/text()",
         "extra" : {}
+       
     },
     "KB" : {
         "format" : "//div[@class='bookitem-secondary-metadata']/h2",
