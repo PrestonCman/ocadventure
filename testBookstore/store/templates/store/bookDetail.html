@@ -14,23 +14,26 @@
 </div>
 
 <div class="boxlist">
-    <h4>ISBN: {{book.isbn_13}}</h4>
-    <h4>Publisher: {{book.publisher}}</h4>
+ 
+    <h4 id="isbn">ISBN:{{book.isbn_13}}</h4>
+    
+   
+    <h4 id="publisher">Publisher:{{book.publisher}}</h4>
     {% if book.volume %}
-        <h4>Volume: {{book.volume}}</h4>
+        <h4 id="volume">Volume: {{book.volume}}</h4>
     {% endif %}
     {% if book.series %}
-        <h4>Series: {{book.series}}</h4>
+        <h4 id="series">Series: {{book.series}}</h4>
     {% endif %}
 </div>
-<div class = "boxlist">
+<div id = "description", class = "boxlist">
     <h4>Description: {{book.description|safe}}</h4>
 </div>
 </ul>
 {% if book.ready_for_sale %}
-    <h2>This book is ready for sale!</h2>
+    <h2 id="ready_for_sale">This book is ready for sale!</h2>
 {% else %}
-    <h2>This book not currently for sale</h2>
+    <h2 id="ready_for_sale">This book not currently for sale</h2>
 {% endif %}
 
 
