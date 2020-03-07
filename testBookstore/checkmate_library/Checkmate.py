@@ -331,7 +331,6 @@ class book_site():
 
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
-        book_id = self,book_id
         url = self.site_url + book_id
         if self.slug == "LC":
             url += "/p"
@@ -342,6 +341,11 @@ class book_site():
                 url = self.site_url + "audiobook/" + book_id
         elif self.slug =="TB":
             url += "/"
+        elif(self.slug =="SD"):
+            if requests.get(self.site_url + "book/" + book_id).status_code == 200:
+                url = self.site_url + "book/" + book_id
+            else:
+                url = self.site_url + "audiobook/" + book_id
 
         return url
     
