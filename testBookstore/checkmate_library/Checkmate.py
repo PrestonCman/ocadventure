@@ -339,6 +339,9 @@ class book_site():
                 url = self.site_url + "ebook/" + book_id
             else:
                 url = self.site_url + "audiobook/" + book_id
+        elif self.slug =="TB":
+            url += "/"
+
         return url
     
 
