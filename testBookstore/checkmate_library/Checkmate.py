@@ -246,47 +246,48 @@ class site_book_data():
         parse = etree.HTMLParser(remove_pis=True)
         tree = etree.parse(io.BytesIO(self.content),parse)
         root = tree.getroot()
+        try:
+            title_element = root.xpath(parser["book_title"])[0]
+            self.book_dictionary["book_title"] = title_element.text
 
-        title_element = root.xpath(parser["book_title"])[0]
-        self.book_dictionary["book_title"] = title_element.text
+            isbn_element = root.xpath(parser["isbn_13"])
+            self.book_dictionary["isbn_13"] = isbn_element
 
-        isbn_element = root.xpath(parser["isbn_13"])
-        self.book_dictionary["isbn_13"] = isbn_element
+            description_element = root.xpath(parser["description"])
+            self.book_dictionary["description"] = description_element
 
-        description_element = root.xpath(parser["description"])
-        self.book_dictionary["description"] = description_element
+            author_element = root.xpath(parser["authors"])
+            self.book_dictionary["authors"] = author_element
 
-        author_element = root.xpath(parser["authors"])
-        self.book_dictionary["authors"] = author_element
-
-        series_element = root.xpath(parser["series"])
-        if len(series_element) == 0:
-            self.book_dictionary["series"] = None 
-        else:
-            self.book_dictionary["series"] = series_element
+            series_element = root.xpath(parser["series"])
+            if len(series_element) == 0:
+                self.book_dictionary["series"] = None 
+            else:
+                self.book_dictionary["series"] = series_element
+                
             
-        
 
-        volume_element = root.xpath(parser["volume_number"])
-        if len(volume_element) == 0:
-            self.book_dictionary["volume_number"] = None
-        else:
-            self.book_dictionary["volume_number"] = volume_element
+            volume_element = root.xpath(parser["volume_number"])
+            if len(volume_element) == 0:
+                self.book_dictionary["volume_number"] = None
+            else:
+                self.book_dictionary["volume_number"] = volume_element
 
-        
-        self.book_dictionary["book_id"] = url[35: len(url)-1]
+            
+            self.book_dictionary["book_id"] = url[35: len(url)-1]
 
-        self.book_dictionary["site_slug"] = "TB"
-        self.book_dictionary["url"] = url
+            self.book_dictionary["site_slug"] = "TB"
+            self.book_dictionary["url"] = url
+            ready_element = root.xpath(parser["ready_for_sale"])
+            if ('not' in str(ready_element)) :
+                self.book_dictionary["ready_for_sale"] = False
+            else:
+                self.book_dictionary["ready_for_sale"] = True
 
-        ready_element = root.xpath(parser["ready_for_sale"])
-        
-        
-        if ('not' in str(ready_element)) :
-            self.book_dictionary["ready_for_sale"] = False
-        else:
-            self.book_dictionary["ready_for_sale"] = True
-##
+            self.book_dictionary["parse_status"] = "Success"
+        except:
+            # if failed, the site book data object will be given a parsed value of "Failed"
+            self.book_dictionary["parse_status"] = "Failed"
         return self
 
 class book_site():
