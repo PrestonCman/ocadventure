@@ -250,6 +250,13 @@ class site_book_data():
             self.book_dictionary["parse_status"] = "PARSE_SUCCESSFUL"
 
         return self
+    
+    def __str__(self):
+        msg = ""
+        for key in self.book_dictionary:
+            if(str(key) != "book_image"):
+                msg += key + " : " + str(self.book_dictionary[key]) + "\n"
+        return msg
 
     def parse_TB(self,parser,url):
         parse = etree.HTMLParser(remove_pis=True)
