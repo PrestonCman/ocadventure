@@ -4,6 +4,8 @@ from lxml import etree
 import requests
 from urllib.parse import urlparse, parse_qs
 from PIL import Image
+import mechanize
+from bs4 import BeautifulSoup as BS
 
 class site_book_data():
     def __init__(self,content):
@@ -67,11 +69,21 @@ class site_book_data():
 
             self.book_dictionary["site_slug"] = "GB"
             self.book_dictionary["url"] = url
-      
 
-    #Here we need to give the value to dictionary. USing the parser.
-    #for key in dictionary:
-    #   key = getInfo(key)
+            parsed = urlparse(url)
+            query = parse_qs(parsed.query)
+            self.book_dictionary["book_id"] = query["id"][0]
+
+            parsed = root.xpath(parser["ready_for_sale"])
+            if len(parsed) != 0:
+                if parsed[0] == 'No eBook available':
+                    self.book_dictionary["ready_for_sale"] = False
+                    self.book_dictionary["format"] = "Print"
+                else:
+                    self.book_dictionary["ready_for_sale"] = True
+                    self.book_dictionary["format"] = "eBook"
+
+            return self 
 
     def parse_LC(self, parser, url):
         """Parsing function for Livraria Cultura eBook store.  Given a parser JSON
@@ -127,7 +139,6 @@ class site_book_data():
             self.book_dictionary["parse_status"] = "Failed"
         
         return self
-
 
     def parse_SD(self, parser, url):
         self.book_dictionary["site_slug"] = "SD"
@@ -318,8 +329,6 @@ class book_site():
         elif (self.slug == "TB"):
             return book_data.parse_TB(self.parser, url)
 
-   
-
     def find_book_matches_at_site(self, book_data):
         """Given a sitebookData object, search for the book 
         at the 'book_site' site and provide a list of likely 
@@ -327,7 +336,67 @@ class book_site():
         exact match). This should take into account all the info 
         we have about a book, including the cover."""
 
-        pass
+        br = mechanize.Browser()
+        br.set_handle_robots(False)
+        br.addheaders = [('User-agent', 'Chrome')]
+        if self.slug == 'TB':
+            url = 'https://127.0.0.1:8000/store/'
+            br.select_form(nr=1)
+            control = br.form.find_control('q')
+        elif self.slug == 'KB':
+            url = 'https://www.kobo.com/'
+            br.select_form(nr=0)
+            control = br.form.find_control('query')
+        elif self.slug == 'GB':
+            url = 'https://books.google.com'
+            br.select_form(nr=0)
+            control = br.form.find_control('q')
+        elif self.slug == 'SD':
+            url = 'https://www.scribd.com/books'
+            br.select_form(nr=0)
+            control = br.form.find_control('query')
+        elif self.slug == 'LC':
+            url = 'https://wwwe.livrariacultura.com.br/'
+            br.select_form(nr=0)
+            control = br.form.find_control(nr=0)
+
+        user_query = ""
+        if book_data.book_dictionary['book_title'] is not None:
+            query += book_data.book_dictionary['book_title'] + ' '
+        if book_data.book_dictionary['isbn_13'] is not None:
+            query += book_data.book_dictionary['isbn_13'] + ' '
+        if book_data.book_dictionary['authors'] is not None:
+            query += book_data.book_dictionary['authors'][0] + ' '
+        control.value = user_query
+        response = br.submit()
+        #print(response.read()) #this gives the raw html.
+        #print(response.geturl()) #gives the full url of the query so it's easier to read than the raw html. good for parsing.
+        #must parse the response to give the list of books
+        num_books = 50
+        book_list = parse_response(num_books, response.geturl())
+        #now take results and assign them a value for how likely a match they are.
+        
+    def parse_response(self, num_books, url):
+        """parse book results into a list of books to return."""
+
+        content = requests.get(url).content
+        temp_parse = etree.HTMLParser(remove_pis=True)
+        tree=etree.parse(io.BytesIO(self.content),temp_parse)
+        root=tree.getroot()
+
+        book_list = []
+        #use lxml queries to get the book results and then use a loop to append each book in the results to the list. use book_list.append()
+        if self.slug == 'TB':
+            pass
+        elif self.slug == 'KB':
+            pass
+        elif self.slug == 'GB':
+            pass
+        elif self.slug == 'SD':
+            pass
+        elif self.slug == 'LC':
+            pass
+        return book_list
 
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
@@ -348,11 +417,8 @@ class book_site():
                 url = self.site_url + "audiobook/" + book_id
 
         return url
-    
-
 
 def get_book_site(slug):
     """Function that takes a string and returns a booksite url"""
     
     return book_site(slug)
-
