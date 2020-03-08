@@ -35,7 +35,7 @@
     },
     "GB" : {
         "format" : null,
-        "site_url" : "https://books.google.com/books?",
+        "site_url" : "https://books.google.com/books?id=",
         "book_title" : ".//h1[@class='booktitle']//span[@dir='ltr']",
         "book_image" : null,
         "book_image_url" : ".//img[@id='summary-frontcover']/@src",
