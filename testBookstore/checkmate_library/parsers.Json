@@ -19,7 +19,7 @@
     },
     "KB" : {
         "format" : "//div[@class='bookitem-secondary-metadata']/h2",
-        "site_url" : "https://www.kobo.com/us/en/",
+        "site_url" : "https://www.kobo.com",
         "book_title" : "//span[@class='title product-field']",
         "book_image_url" : "//img[@class='cover-image  notranslate_alt']/@src",
         "book_image" : "//img[@class='cover-image  notranslate_alt']/@src",
