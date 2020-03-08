@@ -181,7 +181,7 @@ class site_book_data():
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
-            #try:
+            try:
                 if (parser[key] == "!Not_Reachable" or key == "site_url"):
                     pass
                     #not parsable/readable content
@@ -244,9 +244,9 @@ class site_book_data():
                     self.book_dictionary[key] = parser[key]
                 else:
                     self.book_dictionary[key] = root.xpath(parser[key])[0].text
-            #except:
-             #  self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
-            #   break
+            except:
+                self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
+                break
             
         if self.book_dictionary["parse_status"] != "UNSUCCESSFUL":
             self.book_dictionary["parse_status"] = "PARSE_SUCCESSFUL"
