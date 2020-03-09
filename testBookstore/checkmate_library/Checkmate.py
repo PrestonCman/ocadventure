@@ -379,7 +379,7 @@ class book_site():
         """parse book results into a list of books to return."""
 
         book_list = []
-        while len(book_list) != 50:
+        while len(book_list) != num_books:
 
             content = requests.get(url).content
             temp_parse = etree.HTMLParser(remove_pis=True)
