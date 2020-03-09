@@ -375,13 +375,14 @@ class book_site():
 
         user_query = ""
         if self.slug == 'TB':
-            '''if book_data.book_dictionary["isbn_13"] is not None:
+            if book_data.book_dictionary["isbn_13"] is not None:
                 user_query += book_data.book_dictionary["isbn_13"]
             elif book_data.book_dictionary["book_title"] is not None:
                 user_query += book_data.book_dictionary["book_title"]
             elif book_data.book_dictionary["authors"] is not None:
-                user_query += book_data.book_dictionary["authors"][0]'''
-            user_query = book_data.book_dictionary["authors"][0]
+                user_query += book_data.book_dictionary["authors"][0]
+            #user_query = book_data.book_dictionary["authors"][0]
+            #For testing purposes of multiple books in query
         else:   
 
             if book_data.book_dictionary['book_title'] is not None:
@@ -395,7 +396,7 @@ class book_site():
         #print(response.read()) #this gives the raw html.
         #print(response.geturl()) #gives the full url of the query so it's easier to read than the raw html. good for parsing.
         #must parse the response to give the list of books
-        num_books = 10
+        num_books = 50
         book_list = self.parse_response(num_books, response.geturl())
         #now take results and assign them a value for how likely a match they are.
         return book_list
@@ -417,7 +418,6 @@ class book_site():
                 books = root.xpath("//ul[@id='search_result']//a/@href")
                 for book in books:
                     book_url = self.site_url + book
-                    print(book_url)
                     book_list.append(self.get_book_data_from_site(book_url))
 
                 if len(book_list) < num_books:
@@ -429,7 +429,6 @@ class book_site():
                         next_page = current_page.xpath("./following-sibling::a[1]/@href")[0]
                         next_page = next_page.replace(" ", "+")
                         url= self.site_url + "/store/search/" + next_page
-                        print(url)
                 elif len(book_list) >= num_books:
                     del book_list[num_books:]
                     query_finished = True
