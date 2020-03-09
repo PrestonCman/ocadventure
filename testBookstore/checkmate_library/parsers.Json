@@ -1,7 +1,7 @@
 {
     "TB" : {
         "format" : null,
-        "site_url" : "localhost:8080/store/search",
+        "site_url" : "http://localhost:8000/store/search",
         "book_title" : "//h1[@class='title']",
         "book_image" : null,
         "book_image_url" : null,
@@ -19,7 +19,7 @@
     },
     "KB" : {
         "format" : "//div[@class='bookitem-secondary-metadata']/h2",
-        "site_url" : "https://www.kobo.com/us/en/",
+        "site_url" : "https://www.kobo.com",
         "book_title" : "//span[@class='title product-field']",
         "book_image_url" : "//img[@class='cover-image  notranslate_alt']/@src",
         "book_image" : "//img[@class='cover-image  notranslate_alt']/@src",
@@ -55,12 +55,12 @@
         "book_title" : "//h1[@class='document_title']",
         "book_image_url" : "//img[@class='loaded']/@src",
         "book_image" : "//img[@class='loaded']/@src",
-        "isbn_13" : "//span[@class='meta_label'][3]/span[2]",
+        "isbn_13" : "//span[@class='meta_label'][3]/span[2] | //dd[@class='meta_description isbn']",
         "description" : "//meta[@property = 'og:description']/@content",
         "series" : "!Not_Reachable",
         "volume_number" : "!Not_Reachable",
         "subtitle" : "!Not_Reachable",
-        "authors" : "//span[@itemprop='author']/a",
+        "authors" : "//span[@itemprop='author']/a | //a[@class='contributor']",
         "book_id" : null,
         "ready_for_sale" : "!Not_Reachable",
         "extra" : {}

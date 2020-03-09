@@ -5,7 +5,6 @@ import requests
 from urllib.parse import urlparse, parse_qs
 from PIL import Image
 import mechanize
-from bs4 import BeautifulSoup as BS
 
 class site_book_data():
     def __init__(self,content):
@@ -114,7 +113,7 @@ class site_book_data():
             if len(parsed) != 0:
                 self.book_dictionary["description"] = parsed[0]
 
-            self.book_dictionary["book_id"] = url[36: len(url)-2]
+            self.book_dictionary["book_id"] = self.parse_id_from_url(url, 36, len(url)-2)
 
             parsed = root.xpath(parser["authors"])
             if len(parsed) != 0:
@@ -158,8 +157,7 @@ class site_book_data():
                     self.book_dictionary[key] = Image.open(resp)
                 elif(key == "book_id"):
                     myUrl = urlparse(url)
-                    end = myUrl.path.rfind('/')
-                    self.book_dictionary[key] = myUrl.path[6:end]
+                    self.book_dictionary[key] = self.parse_id_from_url(url, (myUrl.path.find("k")+2), myUrl.path.rfind("/"))
                     #parse url for bookID
                 elif(key == "extra"):
                     self.book_dictionary[key] = parser[key]
@@ -172,8 +170,7 @@ class site_book_data():
                     self.book_dictionary[key] = p
                     #parse as normal
         return self
-
-
+    
     def parse_KB(self, parser, url):
         self.book_dictionary["site_slug"] = "KB"
         self.book_dictionary["url"] = url
@@ -181,7 +178,7 @@ class site_book_data():
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
-            #try:
+            try:
                 if (parser[key] == "!Not_Reachable" or key == "site_url"):
                     pass
                     #not parsable/readable content
@@ -244,20 +241,26 @@ class site_book_data():
                     self.book_dictionary[key] = parser[key]
                 else:
                     self.book_dictionary[key] = root.xpath(parser[key])[0].text
-            #except:
-             #  self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
-            #   break
+            except:
+                self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
+                break
             
         if self.book_dictionary["parse_status"] != "UNSUCCESSFUL":
             self.book_dictionary["parse_status"] = "PARSE_SUCCESSFUL"
 
         return self
+    
+    def parse_id_from_url(self, url, start, end):
+        id = url[start: end]
+        return id
 
     def parse_TB(self,parser,url):
         parse = etree.HTMLParser(remove_pis=True)
         tree = etree.parse(io.BytesIO(self.content),parse)
         root = tree.getroot()
         try:
+            self.book_dictionary["format"] = "test book"
+
             title_element = root.xpath(parser["book_title"])[0]
             self.book_dictionary["book_title"] = title_element.text
 
@@ -300,6 +303,13 @@ class site_book_data():
             # if failed, the site book data object will be given a parsed value of "Failed"
             self.book_dictionary["parse_status"] = "Failed"
         return self
+
+    def __str__(self):
+        msg = ""
+        for key in self.book_dictionary:
+            if(str(key) != "book_image"):
+                msg += key + " : " + str(self.book_dictionary[key]) + "\n"
+        return msg
 
 class book_site():
     def __init__(self, slug):
@@ -345,7 +355,7 @@ class book_site():
             br.select_form(nr=1)
             control = br.form.find_control('q')
         elif self.slug == 'KB':
-            url = 'https://www.kobo.com/'
+            br.open(self.site_url)
             br.select_form(nr=0)
             control = br.form.find_control('query')
         elif self.slug == 'GB':
@@ -361,14 +371,14 @@ class book_site():
             br.select_form(nr=0)
             control = br.form.find_control(nr=0)
 
-        query = ""
+        user_query = ""
         if book_data.book_dictionary['book_title'] is not None:
-            query += book_data.book_dictionary['book_title'] + ' '
+            user_query += book_data.book_dictionary['book_title'] + ' '
         if book_data.book_dictionary['isbn_13'] is not None:
-            query += book_data.book_dictionary['isbn_13'] + ' '
+            user_query += book_data.book_dictionary['isbn_13'] + ' '
         if book_data.book_dictionary['authors'] is not None:
-            query += book_data.book_dictionary['authors'][0] + ' '
-        control.value = query
+            user_query += book_data.book_dictionary['authors'][0] + ' '
+        control.value = user_query
         response = br.submit()
         #print(response.read()) #this gives the raw html.
         #print(response.geturl()) #gives the full url of the query so it's easier to read than the raw html. good for parsing.
@@ -376,46 +386,69 @@ class book_site():
         num_books = 50
         book_list = self.parse_response(num_books, response.geturl())
         #now take results and assign them a value for how likely a match they are.
-        
+        return book_list
+
     def parse_response(self, num_books, url):
         """parse book results into a list of books to return."""
 
-        content = requests.get(url).content
-        temp_parse = etree.HTMLParser(remove_pis=True)
-        tree=etree.parse(io.BytesIO(content),temp_parse)
-        root=tree.getroot()
-
         book_list = []
+        query_finished = False
+        while query_finished != True:
+
+            content = requests.get(url).content
+            temp_parse = etree.HTMLParser(remove_pis=True)
+            tree=etree.parse(io.BytesIO(content),temp_parse)
+            root=tree.getroot()
+
         #use lxml queries to get the book results and then use a loop to append each book in the results to the list. use book_list.append()
-        if self.slug == 'TB':
-            pass
-        elif self.slug == 'KB':
-            pass
-        elif self.slug == 'GB':
-            pass
-        elif self.slug == 'SD':
-            pass
-        elif self.slug == 'LC':
-            pass
+            if self.slug == 'TB':
+                pass
+            elif self.slug == 'KB':
+                books = root.xpath("//div[@class='item-detail']/a/@href")
+                for book in books:
+                    book_url = self.site_url + book
+                    book_list.append(self.get_book_data_from_site(book_url))
+
+                if len(book_list) < num_books:
+                    if len(root.xpath("//a[@class='page-link final active']")) > 0:
+                        query_finished = True
+                        break
+                        #reached the end of book results found from query
+                    else:
+                        current_page = root.xpath("//a[@class='page-link first active' or @class='page-link reveal active' or @class='page-link active']")[0]
+                        next_page = current_page.xpath("./following-sibling::a[1]/@href")[0]
+                        url = self.site_url + next_page
+
+                elif len(book_list) >= num_books:
+                    del book_list[num_books:]
+                    query_finished = True
+                
+            elif self.slug == 'GB':
+                pass
+            elif self.slug == 'SD':
+                pass
+            elif self.slug == 'LC':
+                pass
         return book_list
 
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
-        url = self.site_url + book_id
         if self.slug == "LC":
-            url += "/p"
+            url = self.site_url + book_id + "/p"
         elif self.slug == "KB":
-            if requests.get(self.site_url + "ebook/" + book_id).status_code == 200:
-                url = self.site_url + "ebook/" + book_id
+            if requests.get(self.site_url + "/us/en/ebook/" + book_id).status_code == 200:
+                url = self.site_url + "/us/en/ebook/" + book_id
             else:
-                url = self.site_url + "audiobook/" + book_id
+                url = self.site_url + "/us/en/audiobook/" + book_id
         elif self.slug =="TB":
-            url += "/"
+            url = self.site_url  + "/" + book_id
         elif(self.slug =="SD"):
-            if requests.get(self.site_url + "book/" + book_id).status_code == 200:
+            if requests.get(self.site_url + "book/" + str(book_id)).status_code == 200:
                 url = self.site_url + "book/" + book_id
             else:
                 url = self.site_url + "audiobook/" + book_id
+        elif self.slug == "GB":
+            url = self.site_url + book_id
 
         return url
 
