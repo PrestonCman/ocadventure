@@ -405,9 +405,10 @@ class book_site():
         #must parse the response to give the list of books
         num_books = 50
         book_list = self.parse_response(num_books, response.geturl())
+        ranked_list = self.rank_books(book_list, book_data)
         #now take results and assign them a value for how likely a match they are.
-        return book_list
-
+        return ranked_list
+    
     def parse_response(self, num_books, url):
         """parse book results into a list of books to return."""
 
@@ -487,6 +488,34 @@ class book_site():
                 pass
         return book_list
 
+    def rank_books(self, book_list, book_data):
+        """takes a list of site_book_data objects found at a site and compares them with the query data object"""
+        ranked_list = []
+        for book in book_list:
+            ranking = 0
+            for key in book.book_dictionary:
+                if key == 'isbn_13' and book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
+                    if(book_data.book_dictionary[key] in book.book_dictionary[key]):
+                        ranking = 1.0
+                        print("isbn found")
+                        break
+                if key == 'book_title' and book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
+                    if(book_data.book_dictionary[key] in book.book_dictionary[key]):
+                        if ranking > 0.4: 
+                            ranking = 0.9
+                            break
+                        else:
+                            ranking += 0.5
+                else:
+                    if book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
+                        if book_data.book_dictionary[key] in book.book_dictionary[key] and ranking <= 0.9:
+                            ranking += 0.1
+
+            book_set = {ranking, book}
+            ranked_list.append(book_set)
+
+        return ranked_list
+                        
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
         if self.slug == "LC":
