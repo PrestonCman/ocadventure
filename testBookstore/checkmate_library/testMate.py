@@ -19,7 +19,7 @@ def parser_TB_test():
     "3940",
     "712",
     "1728",
-    "5000"]
+    "4812"]
     site = book_site("TB")
     try:
         for url in urls:
@@ -31,6 +31,7 @@ def parser_TB_test():
         print("\n Parsing Failed \n")
         print(e)
         print(e.args)
+
 def parser_KB_test():
     print("Testing Kobo Site: \n")
     urls = ["dragon-s-code",

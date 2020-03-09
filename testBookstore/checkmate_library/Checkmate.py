@@ -24,10 +24,10 @@ class site_book_data():
             'authors' : None, 
             'book_id' : None,
             'site_slug' : None,
-            'parse_status' : "Fully Parsed",
+            'parse_status' : "FULLY_PARSED",
             'url' : None,
             #'content' : self.content,
-            'ready_for_sale' : None,
+            'ready_for_sale' : False,
             'extra' : None,
             }
 
@@ -85,183 +85,125 @@ class site_book_data():
 
             return self 
 
-    def parse_LC(self, parser, url):
-        """Parsing function for Livraria Cultura eBook store.  Given a parser JSON
-        object and the url of the book to be parsed, will return a parsed site book data object"""
-        temp_parse=etree.HTMLParser(remove_pis=True)
-        tree=etree.parse(io.BytesIO(self.content),temp_parse)
-        root=tree.getroot()
+    def parse_LC(self, parser, url, root):
+        """
+            Parsing function for Livraria Cultura eBook store.  Given a parser JSON
+            object and the url of the book to be parsed, will return a parsed site book data object
+        """
 
-        #tries to parse all information from given book url
+        self.book_dictionary["book_id"] = self.parse_id_from_url(url, 36, len(url)-2)
+        self.book_dictionary["extra"] = parser["extra"]
+
         try:
-            self.book_dictionary["format"] = "ebook"
-
-            parsed = root.xpath(parser["book_title"])
-            if len(parsed) != 0:
-                self.book_dictionary["book_title"] = parsed[0]
-
-            parsed = root.xpath(parser["book_image"])
-            if len(parsed) != 0:
-                self.book_dictionary["book_image_url"] = parsed[0]
-                resp = requests.get(parsed[0], stream=True).raw
-                self.book_dictionary["book_image"] = Image.open(resp)   
-
-            parsed = root.xpath(parser["isbn_13"])
-            if len(parsed) != 0:
-                self.book_dictionary["isbn_13"] = parsed[0]
-
-            parsed = root.xpath(parser["description"])
-            if len(parsed) != 0:
-                self.book_dictionary["description"] = parsed[0]
-
-            self.book_dictionary["book_id"] = self.parse_id_from_url(url, 36, len(url)-2)
-
-            parsed = root.xpath(parser["authors"])
-            if len(parsed) != 0:
-                authors = parsed[0].split("|")
-                parsedAuthors = []
-                for author in authors:
-                    parsedAuthors.append(author[6:len(author)-1])
-                
-                self.book_dictionary["authors"] = parsedAuthors
-
-            parsed = root.xpath(parser["ready_for_sale"])
-            if len(parsed) != 0:
-                self.book_dictionary["ready_for_sale"] = True
-            else:
-                self.book_dictionary["ready_for_sale"] = False
-
-            self.book_dictionary["site_slug"] = "LC"
-            self.book_dictionary["url"] = parser["site_url"]
-            self.book_dictionary["parse_status"] = "Success"
+            for key in parser:
+                if key == "format" or key == "site_url" or key == "extra" or parser[key] == "!Not_Reachable":
+                    pass
+                    #not parsable or readable content
+                else:
+                    parsed = root.xpath(parser[key])
+                    if len(parsed) != 0:
+                        if key == "book_image":
+                            self.get_book_image(parsed[0], key)
+                        elif key == "authors":
+                            authors = parsed[0].split("|")
+                            parsedAuthors = []
+                            for author in authors:
+                                parsedAuthors.append(author[6:len(author)-1])
+                            self.book_dictionary[key] = parsedAuthors
+                        elif key == "ready_for_sale":
+                            self.book_dictionary[key] = True
+                        else:
+                            self.book_dictionary[key] = parsed[0]
         except:
             # if failed, the site book data object will be given a parsed value of "Failed"
-            self.book_dictionary["parse_status"] = "Failed"
+            self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
         
         return self
 
-    def parse_SD(self, parser, url):
-        self.book_dictionary["site_slug"] = "SD"
-        self.book_dictionary["url"] = url
-        temp_parse = etree.HTMLParser(remove_pis=True)
-        tree=etree.parse(io.BytesIO(self.content),temp_parse)
-        root=tree.getroot()
-        for key in parser:
-            try:
-                if(parser[key] == "!Not_Reachable" or key == "site_url"):
+    def parse_SD(self, parser, url, root):
+        
+        myUrl = urlparse(url)
+        self.book_dictionary[key] = self.parse_id_from_url(url, (myUrl.path.find("k")+2), myUrl.path.rfind("/"))
+        self.book_dictionary["ready_for_sale"] = True
+        self.book_dictionary["extra"] = parser["extra"]
+
+        try:
+            for key in parser:
+                if parser[key] == "!Not_Reachable" or key == "site_url" or key == "extra":
                     pass
                     #not parsable/readable content
-                elif(key == "format"):
-                    parsed = root.xpath(parser[key])
-                    self.book_dictionary[key] = parsed[-1].text
-                elif(key == "description" or key == "book_image_url"):
-                    parsed = root.xpath(parser[key])
-                    self.book_dictionary[key] = parsed[0]
-                elif(key == "book_image"):
-                    resp = requests.get(self.book_dictionary["book_image_url"], stream=True).raw
-                    self.book_dictionary[key] = Image.open(resp)
-                elif(key == "book_id"):
-                    myUrl = urlparse(url)
-                    self.book_dictionary[key] = self.parse_id_from_url(url, (myUrl.path.find("k")+2), myUrl.path.rfind("/"))
-                    #parse url for bookID
-                elif(key == "extra"):
-                    self.book_dictionary[key] = parser[key]
-                        #call any functions for additionaly queries here
                 else:
                     parsed = root.xpath(parser[key])
-                    p = []
-                    for elem in parsed:
-                        p.append(elem.text)
-                    self.book_dictionary[key] = p
-                    #parse as normal
-            except:
-                    self.book_dictionary["parse_status"] = "Unsuccessful"
-        return self
-    
-    def parse_KB(self, parser, url):
-        self.book_dictionary["site_slug"] = "KB"
-        self.book_dictionary["url"] = url
-        temp_parse = etree.HTMLParser(remove_pis=True)
-        tree=etree.parse(io.BytesIO(self.content),temp_parse)
-        root=tree.getroot()
-        for key in parser:
-            try:
-                if (parser[key] == "!Not_Reachable" or key == "site_url"):
-                    pass
-                    #not parsable/readable content
-                elif (key == "format"):
-                    parsed = root.xpath(parser[key])[0].text
-                    parsed = parsed[:parsed.find(" Details")]
-                    if parsed == "eBook":
-                        self.book_dictionary[key] = "DIGITAL"
-                    elif parsed == "Audiobook":
-                        self.book_dictionary[key] = "AUDIOBOOK"
-                elif (key == "book_title" or key == "subtitle"):
-                    parsed = root.xpath(parser[key])
-                    if len(parsed) > 0:
-                        parsed = parsed[0].text.strip("\r\n")
-                        self.book_dictionary[key] = parsed
-                    else:
-                        self.book_dictionary[key] = None
-                        #Book does not have a subtitle
-                elif (key == "book_image_url"):
-                    parsed = root.xpath(parser[key])
-                    self.book_dictionary[key] = parsed[0]
-                elif (key == "book_image"):
-                    resp = requests.get("http:" + self.book_dictionary["book_image_url"], stream=True).raw
-                    self.book_dictionary[key] = Image.open(resp)
-                elif (key == "isbn_13"):
-                    parsed = root.xpath(parser[key])
-                    for element in parsed:
-                        if element.text == "ISBN: ":
-                            isbn = element.xpath("./span")
-                            self.book_dictionary[key] = isbn[0].text
-                elif (key == "description"):
-                    parsed = root.xpath(parser[key])
-                    description = ""
-                    for element in parsed:
-                        description += element
-                    self.book_dictionary[key] = description
-                elif (key == "book_id"):
-                    myUrl = urlparse(url)
-                    end = myUrl.path.rfind('/')
-                    self.book_dictionary[key] = myUrl.path[end+1:]
-                elif (key == "authors"):
-                    parsed = root.xpath(parser[key])
-                    authors = []
-                    for author in parsed:
-                        authors.append(author.text)
-                    self.book_dictionary[key] = authors
-                elif (key == "series"):
-                    parsed = root.xpath(parser[key])
-                    if len(parsed) > 0:
-                        self.book_dictionary[key] = parsed[0].text
-                    else:
-                        self.book_dictionary[key] = None
-                        #Book not included in series
-                elif (key == "ready_for_sale"):
-                    if len(root.xpath(parser[key])) > 0:
-                        self.book_dictionary[key] = True
-                    else:
-                        self.book_dictionary[key] = False
-                elif (key == "extra"):
-                    self.book_dictionary[key] = parser[key]
-                else:
-                    self.book_dictionary[key] = root.xpath(parser[key])[0].text
-            except:
-                self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
-                break
-            
-        if self.book_dictionary["parse_status"] != "UNSUCCESSFUL":
-            self.book_dictionary["parse_status"] = "PARSE_SUCCESSFUL"
+                    if len(parsed) != 0:
+                        if key == "format":
+                            self.book_dictionary[key] = parsed[-1].text
+                        elif key == "description" or key == "book_image_url":
+                            self.book_dictionary[key] = parsed[0]
+                        elif key == "book_image":
+                            self.get_book_image(parsed[0], key)
+                        else:
+                            p = []
+                            for elem in parsed:
+                                p.append(elem.text)
+                            self.book_dictionary[key] = p
+                            #parse as normal
+        except:
+            self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
 
         return self
     
-    def parse_id_from_url(self, url, start, end):
-        id = url[start: end]
-        return id
+    def parse_KB(self, parser, url, root):
 
-    def parse_TB(self,parser,url):
+        myUrl = urlparse(url)
+        end = myUrl.path.rfind("/")
+        self.book_dictionary["book_id"] = myUrl.path[end+1:]
+        self.book_dictionary["extra"] = parser["extra"]
+
+        try:
+            for key in parser:
+                if (parser[key] == "!Not_Reachable" or key == "extra" or key == "site_url"):
+                    pass
+                    #not parsable/readable content
+                else:
+                    parsed = root.xpath(parser[key])
+                    if len(parsed) > 0:
+                        if key == "format":
+                            book_format = parsed[0][:parsed[0].find(" Details")]
+                            if book_format == "eBook":
+                                self.book_dictionary[key] = "DIGITAL"
+                            elif book_format == "Audiobook":
+                                self.book_dictionary[key] = "AUDIOBOOK"
+                        elif key == "book_title" or key == "subtitle":
+                            parsed = parsed[0].strip("\r\n")
+                            self.book_dictionary[key] = parsed
+                        elif key == "description":
+                            description = ""
+                            for element in parsed:
+                                description += element
+                            self.book_dictionary[key] = description
+                        elif (key == "book_image"):
+                            self.get_book_image("http:" + parsed[0], key)
+                        elif (key == "isbn_13"):
+                            for element in parsed:
+                                if element.text == "ISBN: ":
+                                    isbn = element.xpath("./span")
+                                    self.book_dictionary[key] = isbn[0].text
+                        elif (key == "authors"):
+                            authors = []
+                            for author in parsed:
+                                authors.append(author.text)
+                            self.book_dictionary[key] = authors
+                        elif (key == "ready_for_sale"):
+                            self.book_dictionary[key] = True
+                        else:
+                            parsed = parsed[0].strip("\r\n")
+                            self.book_dictionary[key] = parsed
+        except:
+            self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
+
+        return self
+
+    def parse_TB(self,parser,url, root):
         parse = etree.HTMLParser(remove_pis=True)
         tree = etree.parse(io.BytesIO(self.content),parse)
         root = tree.getroot()
@@ -287,17 +229,13 @@ class site_book_data():
             else:
                 self.book_dictionary["series"] = series_element
                 
-            
-
             volume_element = root.xpath(parser["volume_number"])
             if len(volume_element) == 0:
                 self.book_dictionary["volume_number"] = None
             else:
                 self.book_dictionary["volume_number"] = volume_element
 
-            
             self.book_dictionary["book_id"] = url[35: len(url)-1]
-
             self.book_dictionary["site_slug"] = "TB"
             self.book_dictionary["url"] = url
             ready_element = root.xpath(parser["ready_for_sale"])
@@ -306,11 +244,19 @@ class site_book_data():
             else:
                 self.book_dictionary["ready_for_sale"] = True
 
-            self.book_dictionary["parse_status"] = "Success"
         except:
             # if failed, the site book data object will be given a parsed value of "Failed"
-            self.book_dictionary["parse_status"] = "Failed"
+            self.book_dictionary["parse_status"] = "UNSUCCESSFUL"
+
         return self
+
+    def get_book_image(self, image_url, key):
+        resp = requests.get(image_url, stream=True).raw
+        self.book_dictionary[key] = Image.open(resp)
+
+    def parse_id_from_url(self, url, start, end):
+        id = url[start: end]
+        return id
 
     def __str__(self):
         msg = ""
@@ -336,16 +282,23 @@ class book_site():
         content = requests.get(url).content
 
         book_data = site_book_data(content)
+        book_data.book_dictionary["site_slug"] = self.slug
+        book_data.book_dictionary["url"] = url
+
+        temp_parse = etree.HTMLParser(remove_pis=True)
+        tree=etree.parse(io.BytesIO(content),temp_parse)
+        root=tree.getroot()
+
         if self.slug == "GB":
             return book_data.parse_GB(self.parser, url)
         elif(self.slug == "SD"):
-            return book_data.parse_SD(self.parser, url)
+            return book_data.parse_SD(self.parser, url, root)
         elif(self.slug == "LC"):
-            return book_data.parse_LC(self.parser, url)
+            return book_data.parse_LC(self.parser, url, root)
         elif (self.slug == "KB"):
-            return book_data.parse_KB(self.parser, url)
+            return book_data.parse_KB(self.parser, url, root)
         elif (self.slug == "TB"):
-            return book_data.parse_TB(self.parser, url)
+            return book_data.parse_TB(self.parser, url, root)
 
     def find_book_matches_at_site(self, book_data):
         """Given a sitebookData object, search for the book 
@@ -440,7 +393,6 @@ class book_site():
                     del book_list[num_books:]
                     query_finished = True
             
-
             elif self.slug == 'KB':
                 books = root.xpath("//div[@class='item-detail']/a/@href")
                 for book in books:
@@ -463,6 +415,7 @@ class book_site():
                 
             elif self.slug == 'GB':
                 pass
+
             elif self.slug == 'SD':
                 myQuery = "//script[12]"
                 parsed = root.xpath(myQuery)
@@ -483,26 +436,35 @@ class book_site():
                     if(len(book_list) == num_books):
                         break
                 query_finished = True
+            
             elif self.slug == 'LC':
                 pass
+
         return book_list
 
     def convert_book_id_to_url(self, book_id):
         """given a book_id, return the direct url for the book."""
+        
         if self.slug == "LC":
             url = self.site_url + book_id + "/p"
+        
         elif self.slug == "KB":
             if requests.get(self.site_url + "/us/en/ebook/" + book_id).status_code == 200:
                 url = self.site_url + "/us/en/ebook/" + book_id
             else:
                 url = self.site_url + "/us/en/audiobook/" + book_id
+        
         elif self.slug =="TB":
             url = self.site_url  + "/store/search/" + book_id
-        elif(self.slug =="SD"):
+        
+        elif self.slug =="SD":
             if requests.get(self.site_url + "book/" + book_id).status_code == 200:
                 url = self.site_url + "book/" + book_id + "/"
             else:
                 url = self.site_url + "audiobook/" + book_id + "/"
+
+        else:
+            url = self.site_url + book_id
 
         return url
 
@@ -510,7 +472,6 @@ def get_book_site(slug):
     """Function that takes a string and returns a booksite url"""
     
     return book_site(slug)
-
 
 def parse_scribd_json_for_ids(results):
     ids = [m.start() for m in re.finditer('"doc_id":', results)]
