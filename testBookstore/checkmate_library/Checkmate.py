@@ -341,6 +341,7 @@ class book_site():
         br.addheaders = [('User-agent', 'Chrome')]
         if self.slug == 'TB':
             url = 'https://127.0.0.1:8000/store/'
+            br.open(url)
             br.select_form(nr=1)
             control = br.form.find_control('q')
         elif self.slug == 'KB':
@@ -360,20 +361,20 @@ class book_site():
             br.select_form(nr=0)
             control = br.form.find_control(nr=0)
 
-        user_query = ""
+        query = ""
         if book_data.book_dictionary['book_title'] is not None:
             query += book_data.book_dictionary['book_title'] + ' '
         if book_data.book_dictionary['isbn_13'] is not None:
             query += book_data.book_dictionary['isbn_13'] + ' '
         if book_data.book_dictionary['authors'] is not None:
             query += book_data.book_dictionary['authors'][0] + ' '
-        control.value = user_query
+        control.value = query
         response = br.submit()
         #print(response.read()) #this gives the raw html.
         #print(response.geturl()) #gives the full url of the query so it's easier to read than the raw html. good for parsing.
         #must parse the response to give the list of books
         num_books = 50
-        book_list = parse_response(num_books, response.geturl())
+        book_list = self.parse_response(num_books, response.geturl())
         #now take results and assign them a value for how likely a match they are.
         
     def parse_response(self, num_books, url):
@@ -381,7 +382,7 @@ class book_site():
 
         content = requests.get(url).content
         temp_parse = etree.HTMLParser(remove_pis=True)
-        tree=etree.parse(io.BytesIO(self.content),temp_parse)
+        tree=etree.parse(io.BytesIO(content),temp_parse)
         root=tree.getroot()
 
         book_list = []
