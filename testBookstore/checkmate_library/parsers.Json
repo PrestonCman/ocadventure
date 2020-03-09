@@ -50,7 +50,7 @@
         "extra" : {}
     },
     "SD" : {
-        "format" : "//span[@class='meta_label'][4]/span[2]",
+        "format" : "//span[@class='meta_label'][4]/span[2] | //dd[@class='meta_description format'] | //dd[@class='meta_description format']/span",
         "site_url" : "https://www.scribd.com/",
         "book_title" : "//h1[@class='document_title']",
         "book_image_url" : "//img[@class='loaded']/@src",
