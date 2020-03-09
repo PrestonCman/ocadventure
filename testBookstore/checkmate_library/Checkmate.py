@@ -26,7 +26,7 @@ class site_book_data():
             'site_slug' : None,
             'parse_status' : "Fully Parsed",
             'url' : None,
-            #'content' : self.content,
+            'content' : self.content,
             'ready_for_sale' : None,
             'extra' : None,
             }
