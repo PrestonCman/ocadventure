@@ -31,6 +31,7 @@ def parser_TB_test():
         print("\n Parsing Failed \n")
         print(e)
         print(e.args)
+
 def parser_KB_test():
     print("Testing Kobo Site: \n")
     urls = ["dragon-s-code",
@@ -149,14 +150,43 @@ def id_to_url_test():
     site = book_site("LC")
     print("\nLivraria Cultura Bookstore book url from ID " + id + "\nBook URL: " + site.convert_book_id_to_url(id))
 
+def find_book_matches_test():
+    book_sites = [book_site("KB"), book_site("SD"), book_site("TB")]
+    
+    for site in book_sites:
+        book_data = site_book_data(None)
+        book_data.book_dictionary["book_title"] = "Berenstain Bears"   
+        book_list = site.find_book_matches_at_site(book_data)
+        for book in book_list:
+            print(book[1])
+
+def scraper_test():
+    site = book_site("TB")
+    book_data = site_book_data(None)
+    book_data.book_dictionary["isbn_13"] = None
+    book_data.book_dictionary["book_title"] = None
+    book_data.book_dictionary["authors"] = None
+
+    book_list = site.find_book_matches_at_site(book_data)
+
+    for index, book in enumerate(book_list, start=1):
+        print(book)
+        if index%10 == 0:
+            x = input()
+            if x == 'q':
+                break
+
+
 def main():
     try:
-        parser_TB_test()
-        parser_KB_test()
-        parser_GB_test()
-        parser_SD_test()
-        parser_LC_test()
-        id_to_url_test()
+        # parser_TB_test()
+        # parser_KB_test()
+        # parser_GB_test()
+        # parser_SD_test()
+        # parser_LC_test()
+        # id_to_url_test()
+        # find_book_matches_test()
+
         print("\n Test(s) were successful \n")
     except Exception as e:
         print("\n Test(s) Failed \n")
