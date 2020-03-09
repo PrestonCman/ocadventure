@@ -162,4 +162,11 @@ def main():
         print(e)
         print(e.args)
 
-main()
+#main()
+site = book_site("TB")
+url = site.convert_book_id_to_url("300")
+book_data = site.get_book_data_from_site(url)
+book_matches = site.find_book_matches_at_site(book_data)
+print(len(book_matches))
+for book in book_matches:
+    print(book.book_dictionary["parse_status"])

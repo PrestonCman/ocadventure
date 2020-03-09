@@ -5,7 +5,7 @@
 
 {% if book_list %}
 <h1>Result for : {{query}}</h1>
-  <ul class="boxlist">
+  <ul class="boxlist", id = "search_result">
     {% for book in book_list %}
       <li class="borderlist">
        <h3><a href="{% url 'detail' book.id %}">{{book.title}}</a></h3>
@@ -14,7 +14,7 @@
         ISBN: {{book.isbn_13}}
         </p>
       </li>
-    {% endfor %}
+    {% endfor %} 
   </ul>
 
   {% block pagination %}

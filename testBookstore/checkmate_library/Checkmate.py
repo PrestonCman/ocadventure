@@ -402,7 +402,24 @@ class book_site():
 
         #use lxml queries to get the book results and then use a loop to append each book in the results to the list. use book_list.append()
             if self.slug == 'TB':
-                pass
+                books = root.xpath("//ul[@id='search_result']/a/@href")
+                for book in books:
+                    book_url = self.site_url + book
+                    book_list.append(self.get_book_data_from_site(book_url))
+
+                if len(book_list) < num_books:
+                    if len(root.xpath("//span[@class='page-links']//a[text()='next']/@href"))==0:
+                        query_finished = True
+                        break
+                    else:
+                        current_page = root.xpath("//a[@class = 'page-current']")[0]
+                        next_page = current_page.xpath("./following-sibling::a[1]/@href")[0]
+                        url= self.site_url + next_page
+                elif len(book_list) >= num_books:
+                    del book_list[num_books:]
+                    query_finished = True
+            
+
             elif self.slug == 'KB':
                 books = root.xpath("//div[@class='item-detail']/a/@href")
                 for book in books:
