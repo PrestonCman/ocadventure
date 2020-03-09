@@ -358,7 +358,7 @@ class book_site():
         br.set_handle_robots(False)
         br.addheaders = [('User-agent', 'Chrome')]
         if self.slug == 'TB':
-            url = 'https://127.0.0.1:8000/store/'
+            url = 'http://127.0.0.1:8000/store/'
             br.open(url)
             br.select_form(nr=1)
             control = br.form.find_control('q')
