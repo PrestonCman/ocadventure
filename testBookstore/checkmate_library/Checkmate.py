@@ -270,8 +270,9 @@ class site_book_data():
             description_element = root.xpath(parser["description"])
             self.book_dictionary["description"] = description_element
 
-            author_element = root.xpath(parser["authors"])
-            self.book_dictionary["authors"] = author_element
+            authors = list()
+            authors.append(root.xpath(parser["authors"]))
+            self.book_dictionary["authors"] = authors
 
             series_element = root.xpath(parser["series"])
             if len(series_element) == 0:
@@ -350,8 +351,7 @@ class book_site():
         br.set_handle_robots(False)
         br.addheaders = [('User-agent', 'Chrome')]
         if self.slug == 'TB':
-            url = 'https://127.0.0.1:8000/store/'
-            br.open(url)
+            br.open(self.site_url)
             br.select_form(nr=1)
             control = br.form.find_control('q')
         elif self.slug == 'KB':
@@ -371,19 +371,31 @@ class book_site():
             br.select_form(nr=0)
             control = br.form.find_control(nr=0)
 
+
+
         user_query = ""
-        if book_data.book_dictionary['book_title'] is not None:
-            user_query += book_data.book_dictionary['book_title'] + ' '
-        if book_data.book_dictionary['isbn_13'] is not None:
-            user_query += book_data.book_dictionary['isbn_13'] + ' '
-        if book_data.book_dictionary['authors'] is not None:
-            user_query += book_data.book_dictionary['authors'][0] + ' '
+        if self.slug == 'TB':
+            '''if book_data.book_dictionary["isbn_13"] is not None:
+                user_query += book_data.book_dictionary["isbn_13"]
+            elif book_data.book_dictionary["book_title"] is not None:
+                user_query += book_data.book_dictionary["book_title"]
+            elif book_data.book_dictionary["authors"] is not None:
+                user_query += book_data.book_dictionary["authors"][0]'''
+            user_query = book_data.book_dictionary["authors"][0]
+        else:   
+
+            if book_data.book_dictionary['book_title'] is not None:
+                user_query += book_data.book_dictionary['book_title'] + ' '
+            if book_data.book_dictionary['isbn_13'] is not None:
+                user_query += book_data.book_dictionary['isbn_13'] + ' '
+            if book_data.book_dictionary['authors'] is not None:
+                user_query += book_data.book_dictionary['authors'][0] + ' '
         control.value = user_query
         response = br.submit()
         #print(response.read()) #this gives the raw html.
         #print(response.geturl()) #gives the full url of the query so it's easier to read than the raw html. good for parsing.
         #must parse the response to give the list of books
-        num_books = 50
+        num_books = 10
         book_list = self.parse_response(num_books, response.geturl())
         #now take results and assign them a value for how likely a match they are.
         return book_list
@@ -402,19 +414,22 @@ class book_site():
 
         #use lxml queries to get the book results and then use a loop to append each book in the results to the list. use book_list.append()
             if self.slug == 'TB':
-                books = root.xpath("//ul[@id='search_result']/a/@href")
+                books = root.xpath("//ul[@id='search_result']//a/@href")
                 for book in books:
                     book_url = self.site_url + book
+                    print(book_url)
                     book_list.append(self.get_book_data_from_site(book_url))
 
                 if len(book_list) < num_books:
-                    if len(root.xpath("//span[@class='page-links']//a[text()='next']/@href"))==0:
+                    if len(root.xpath("//span[@class='page-links']//a[text()='next']"))==0:
                         query_finished = True
                         break
                     else:
-                        current_page = root.xpath("//a[@class = 'page-current']")[0]
+                        current_page = root.xpath("//span[@class='page-current']")[0]
                         next_page = current_page.xpath("./following-sibling::a[1]/@href")[0]
-                        url= self.site_url + next_page
+                        next_page = next_page.replace(" ", "+")
+                        url= self.site_url + "/store/search/" + next_page
+                        print(url)
                 elif len(book_list) >= num_books:
                     del book_list[num_books:]
                     query_finished = True
@@ -458,7 +473,7 @@ class book_site():
             else:
                 url = self.site_url + "/us/en/audiobook/" + book_id
         elif self.slug =="TB":
-            url = self.site_url  + "/" + book_id
+            url = self.site_url  + "/store/search/" + book_id
         elif(self.slug =="SD"):
             if requests.get(self.site_url + "book/" + str(book_id)).status_code == 200:
                 url = self.site_url + "book/" + book_id
