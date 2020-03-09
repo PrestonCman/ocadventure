@@ -484,7 +484,6 @@ def get_book_site(slug):
 def parse_scribd_json_for_ids(results):
     ids = [m.start() for m in re.finditer('"doc_id":', results)]
     bookIds = []
-    print(len(ids))
     start = int(ids[-1]) + 9
     end = start + 9
     counter = 0
