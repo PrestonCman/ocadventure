@@ -400,7 +400,7 @@ class book_site():
 
         book_list = []
         query_finished = False
-        while query_finished != True:
+        while not query_finished:
 
             content = requests.get(url).content
             temp_parse = etree.HTMLParser(remove_pis=True)
@@ -433,7 +433,8 @@ class book_site():
             elif self.slug == 'GB':
                 pass
             elif self.slug == 'SD':
-                parsed = root.xpath(query)
+                myQuery = "//script[12]"
+                parsed = root.xpath(myQuery)
                 results = parsed[0].text
                 bookIds = parse_scribd_json_for_ids(results)
                 bookURLS = []
@@ -450,6 +451,7 @@ class book_site():
                         book_list.append(self.get_book_data_from_site(book))
                     if(len(book_list) == num_books):
                         break
+                query_finished = True
             elif self.slug == 'LC':
                 pass
         return book_list
@@ -479,18 +481,18 @@ def get_book_site(slug):
     return book_site(slug)
 
 
-def parse_scribd_json_for_ids(text):
-    ids = [m.start() for m in re.finditer('"doc_id":', text)]
+def parse_scribd_json_for_ids(results):
+    ids = [m.start() for m in re.finditer('"doc_id":', results)]
     bookIds = []
+    print(len(ids))
     start = int(ids[-1]) + 9
     end = start + 9
     counter = 0
     for i in ids:
         start = int(ids[counter]) + 9
         end = start + 9
-        bookIds.append(text[start:end])
+        bookIds.append(results[start:end])
         counter += 1
-
     return bookIds
     
 
