@@ -1,6 +1,7 @@
 """
 This file is for testing any functions you wish to invoke from the checkmate library
 """
+
 from Checkmate import *
 import io
 from lxml import etree
@@ -163,6 +164,7 @@ def main():
         print(e.args)
 
 #main()
+
 site = book_site("TB")
 url = site.convert_book_id_to_url("300")
 book_data = site.get_book_data_from_site(url)
