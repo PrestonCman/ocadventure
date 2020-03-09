@@ -391,7 +391,8 @@ class book_site():
         """parse book results into a list of books to return."""
 
         book_list = []
-        while len(book_list) != num_books:
+        query_finished = False
+        while query_finished != True:
 
             content = requests.get(url).content
             temp_parse = etree.HTMLParser(remove_pis=True)
@@ -409,7 +410,7 @@ class book_site():
 
                 if len(book_list) < num_books:
                     if len(root.xpath("//a[@class='page-link final active']")) > 0:
-                        print("Reached end of book queries")
+                        query_finished = True
                         break
                         #reached the end of book results found from query
                     else:
@@ -417,8 +418,9 @@ class book_site():
                         next_page = current_page.xpath("./following-sibling::a[1]/@href")[0]
                         url = self.site_url + next_page
 
-                elif len(book_list) > num_books:
+                elif len(book_list) >= num_books:
                     del book_list[num_books:]
+                    query_finished = True
                 
             elif self.slug == 'GB':
                 pass
