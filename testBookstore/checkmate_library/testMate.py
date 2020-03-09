@@ -150,12 +150,13 @@ def id_to_url_test():
 
 def main():
     try:
-        # parser_TB_test()
-        # parser_KB_test()
-        # parser_GB_test()
-        # parser_SD_test()
-        # parser_LC_test()
+        parser_TB_test()
+        parser_KB_test()
+        parser_GB_test()
+        parser_SD_test()
+        parser_LC_test()
         id_to_url_test()
+        print("\n Test(s) were successful \n")
     except Exception as e:
         print("\n Test(s) Failed \n")
         print(e)
