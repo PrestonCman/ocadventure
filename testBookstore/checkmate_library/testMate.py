@@ -157,7 +157,25 @@ def find_book_matches_test():
         book_data = site_book_data(None)
         book_data.book_dictionary["book_title"] = "Berenstain Bears"   
         book_list = site.find_book_matches_at_site(book_data)
-        print(book_list)
+        for book in book_list:
+            print(book[1])
+
+def scraper_test():
+    site = book_site("TB")
+    book_data = site_book_data(None)
+    book_data.book_dictionary["isbn_13"] = None
+    book_data.book_dictionary["book_title"] = None
+    book_data.book_dictionary["authors"] = None
+
+    book_list = site.find_book_matches_at_site(book_data)
+
+    for index, book in enumerate(book_list, start=1):
+        print(book)
+        if index%10 == 0:
+            x = input()
+            if x == 'q':
+                break
+
 
 def main():
     try:
@@ -167,7 +185,8 @@ def main():
         # parser_SD_test()
         # parser_LC_test()
         # id_to_url_test()
-        find_book_matches_test()
+        # find_book_matches_test()
+
         print("\n Test(s) were successful \n")
     except Exception as e:
         print("\n Test(s) Failed \n")
