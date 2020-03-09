@@ -5,6 +5,7 @@ import requests
 from urllib.parse import urlparse, parse_qs
 from PIL import Image
 import mechanize
+import re
 
 class site_book_data():
     def __init__(self,content):
@@ -23,7 +24,7 @@ class site_book_data():
             'authors' : None, 
             'book_id' : None,
             'site_slug' : None,
-            'parse_status' : None,
+            'parse_status' : "Fully Parsed",
             'url' : None,
             #'content' : self.content,
             'ready_for_sale' : None,
@@ -146,9 +147,13 @@ class site_book_data():
         tree=etree.parse(io.BytesIO(self.content),temp_parse)
         root=tree.getroot()
         for key in parser:
+            try:
                 if(parser[key] == "!Not_Reachable" or key == "site_url"):
                     pass
                     #not parsable/readable content
+                elif(key == "format"):
+                    parsed = root.xpath(parser[key])
+                    self.book_dictionary[key] = parsed[-1].text
                 elif(key == "description" or key == "book_image_url"):
                     parsed = root.xpath(parser[key])
                     self.book_dictionary[key] = parsed[0]
@@ -169,6 +174,8 @@ class site_book_data():
                         p.append(elem.text)
                     self.book_dictionary[key] = p
                     #parse as normal
+            except:
+                    self.book_dictionary["parse_status"] = "Unsuccessful"
         return self
     
     def parse_KB(self, parser, url):
@@ -364,6 +371,7 @@ class book_site():
             control = br.form.find_control('q')
         elif self.slug == 'SD':
             url = 'https://www.scribd.com/books'
+            br.open(url)
             br.select_form(nr=0)
             control = br.form.find_control('query')
         elif self.slug == 'LC':
@@ -373,25 +381,24 @@ class book_site():
 
 
 
-        user_query = ""
+        query = ""
         if self.slug == 'TB':
             if book_data.book_dictionary["isbn_13"] is not None:
-                user_query += book_data.book_dictionary["isbn_13"]
+                query += book_data.book_dictionary["isbn_13"]
             elif book_data.book_dictionary["book_title"] is not None:
-                user_query += book_data.book_dictionary["book_title"]
+                query += book_data.book_dictionary["book_title"]
             elif book_data.book_dictionary["authors"] is not None:
-                user_query += book_data.book_dictionary["authors"][0]
-            #user_query = book_data.book_dictionary["authors"][0]
+                query += book_data.book_dictionary["authors"][0]
+            #query = book_data.book_dictionary["authors"][0]
             #For testing purposes of multiple books in query
         else:   
-
             if book_data.book_dictionary['book_title'] is not None:
-                user_query += book_data.book_dictionary['book_title'] + ' '
+                query += book_data.book_dictionary['book_title'] + ' '
             if book_data.book_dictionary['isbn_13'] is not None:
-                user_query += book_data.book_dictionary['isbn_13'] + ' '
+                query += book_data.book_dictionary['isbn_13'] + ' '
             if book_data.book_dictionary['authors'] is not None:
-                user_query += book_data.book_dictionary['authors'][0] + ' '
-        control.value = user_query
+                query += book_data.book_dictionary['authors'][0] + ' '
+        control.value = query
         response = br.submit()
         #print(response.read()) #this gives the raw html.
         #print(response.geturl()) #gives the full url of the query so it's easier to read than the raw html. good for parsing.
@@ -406,7 +413,7 @@ class book_site():
 
         book_list = []
         query_finished = False
-        while query_finished != True:
+        while not query_finished:
 
             content = requests.get(url).content
             temp_parse = etree.HTMLParser(remove_pis=True)
@@ -457,7 +464,25 @@ class book_site():
             elif self.slug == 'GB':
                 pass
             elif self.slug == 'SD':
-                pass
+                myQuery = "//script[12]"
+                parsed = root.xpath(myQuery)
+                results = parsed[0].text
+                bookIds = parse_scribd_json_for_ids(results)
+                bookURLS = []
+                for ID in bookIds:
+                    bookURLS.append(self.convert_book_id_to_url(ID))
+
+                testLoad = mechanize.Browser()
+                testLoad.set_handle_robots(False)
+                testLoad.addheaders = [('User-agent', 'Chrome')]
+                for book in bookURLS:
+                    response = testLoad.open(book)
+                    url = response.geturl()
+                    if(url[23] == 'b' or url[23] == 'a'):
+                        book_list.append(self.get_book_data_from_site(book))
+                    if(len(book_list) == num_books):
+                        break
+                query_finished = True
             elif self.slug == 'LC':
                 pass
         return book_list
@@ -474,12 +499,10 @@ class book_site():
         elif self.slug =="TB":
             url = self.site_url  + "/store/search/" + book_id
         elif(self.slug =="SD"):
-            if requests.get(self.site_url + "book/" + str(book_id)).status_code == 200:
-                url = self.site_url + "book/" + book_id
+            if requests.get(self.site_url + "book/" + book_id).status_code == 200:
+                url = self.site_url + "book/" + book_id + "/"
             else:
-                url = self.site_url + "audiobook/" + book_id
-        elif self.slug == "GB":
-            url = self.site_url + book_id
+                url = self.site_url + "audiobook/" + book_id + "/"
 
         return url
 
@@ -487,3 +510,22 @@ def get_book_site(slug):
     """Function that takes a string and returns a booksite url"""
     
     return book_site(slug)
+
+
+def parse_scribd_json_for_ids(results):
+    ids = [m.start() for m in re.finditer('"doc_id":', results)]
+    bookIds = []
+    start = int(ids[-1]) + 9
+    end = start + 9
+    counter = 0
+    for i in ids:
+        start = int(ids[counter]) + 9
+        end = start + 9
+        bookIds.append(results[start:end])
+        counter += 1
+    return bookIds
+    
+
+
+    
+
