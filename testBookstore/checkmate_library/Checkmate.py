@@ -162,7 +162,7 @@ class site_book_data():
                     self.book_dictionary[key] = Image.open(resp)
                 elif(key == "book_id"):
                     myUrl = urlparse(url)
-                    self.book_dictionary[key] = self.parse_id_from_url(url, (myUrl.path.find("k")+2), myUrl.path.rfind("/"))
+                    self.book_dictionary[key] = self.parse_id_from_url(myUrl.path, (myUrl.path.find("k")+2), myUrl.path.rfind("/"))
                     #parse url for bookID
                 elif(key == "extra"):
                     self.book_dictionary[key] = parser[key]
@@ -358,7 +358,8 @@ class book_site():
         br.set_handle_robots(False)
         br.addheaders = [('User-agent', 'Chrome')]
         if self.slug == 'TB':
-            br.open(self.site_url)
+            url = 'https://127.0.0.1:8000/store/'
+            br.open(url)
             br.select_form(nr=1)
             control = br.form.find_control('q')
         elif self.slug == 'KB':
@@ -367,6 +368,7 @@ class book_site():
             control = br.form.find_control('query')
         elif self.slug == 'GB':
             url = 'https://books.google.com'
+            br.open(url)
             br.select_form(nr=0)
             control = br.form.find_control('q')
         elif self.slug == 'SD':
@@ -376,28 +378,19 @@ class book_site():
             control = br.form.find_control('query')
         elif self.slug == 'LC':
             url = 'https://wwwe.livrariacultura.com.br/'
+            br.open(url)
             br.select_form(nr=0)
             control = br.form.find_control(nr=0)
 
 
 
         query = ""
-        if self.slug == 'TB':
-            if book_data.book_dictionary["isbn_13"] is not None:
-                query += book_data.book_dictionary["isbn_13"]
-            elif book_data.book_dictionary["book_title"] is not None:
-                query += book_data.book_dictionary["book_title"]
-            elif book_data.book_dictionary["authors"] is not None:
-                query += book_data.book_dictionary["authors"][0]
-            #query = book_data.book_dictionary["authors"][0]
-            #For testing purposes of multiple books in query
-        else:   
-            if book_data.book_dictionary['book_title'] is not None:
-                query += book_data.book_dictionary['book_title'] + ' '
-            if book_data.book_dictionary['isbn_13'] is not None:
-                query += book_data.book_dictionary['isbn_13'] + ' '
-            if book_data.book_dictionary['authors'] is not None:
-                query += book_data.book_dictionary['authors'][0] + ' '
+        if book_data.book_dictionary['isbn_13'] is not None:
+            query += book_data.book_dictionary['isbn_13']
+        elif book_data.book_dictionary['book_title'] is not None:
+            query += book_data.book_dictionary['book_title']
+        elif book_data.book_dictionary['authors'] is not None:
+            query += book_data.book_dictionary['authors'][0]
         control.value = query
         response = br.submit()
         #print(response.read()) #this gives the raw html.
@@ -495,23 +488,41 @@ class book_site():
             ranking = 0
             for key in book.book_dictionary:
                 if key == 'isbn_13' and book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
-                    if(book_data.book_dictionary[key] in book.book_dictionary[key]):
-                        ranking = 1.0
-                        print("isbn found")
-                        break
-                if key == 'book_title' and book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
-                    if(book_data.book_dictionary[key] in book.book_dictionary[key]):
-                        if ranking > 0.4: 
-                            ranking = 0.9
+                    if book.book_dictionary is type(list):
+                        if(book_data.book_dictionary[key] in book.book_dictionary[key][0]):
+                            ranking = 1.0
+                            print("isbn found")
                             break
-                        else:
-                            ranking += 0.5
+                    else:
+                        if(book_data.book_dictionary[key] in book.book_dictionary[key]):
+                            ranking = 1.0
+                            print("isbn found")
+                            break
+                if key == 'book_title' and book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
+                    if book.book_dictionary is type(list):
+                        if(book_data.book_dictionary[key] in book.book_dictionary[key][0]):
+                            if ranking > 0.4: 
+                                ranking = 0.9
+                                break
+                            else:
+                                ranking += 0.5
+                    else:
+                        if(book_data.book_dictionary[key] in book.book_dictionary[key][0]):
+                            if ranking > 0.4: 
+                                ranking = 0.9
+                                break
+                            else:
+                                ranking += 0.5
                 else:
                     if book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
-                        if book_data.book_dictionary[key] in book.book_dictionary[key] and ranking <= 0.9:
-                            ranking += 0.1
+                        if book.book_dictionary is type(list):
+                            if book_data.book_dictionary[key] in book.book_dictionary[key][0] and ranking <= 0.9:
+                                ranking += 0.1
+                        else:
+                            if book_data.book_dictionary[key] in book.book_dictionary[key] and ranking <= 0.9:
+                                ranking += 0.1
 
-            book_set = {ranking, book}
+            book_set = [ranking, book]
             ranked_list.append(book_set)
 
         return ranked_list
@@ -544,6 +555,7 @@ def get_book_site(slug):
 def parse_scribd_json_for_ids(results):
     ids = [m.start() for m in re.finditer('"doc_id":', results)]
     bookIds = []
+    print(len(ids))
     start = int(ids[-1]) + 9
     end = start + 9
     counter = 0
