@@ -3,6 +3,7 @@ This file is for testing any functions you wish to invoke from the checkmate lib
 """
 
 from Checkmate import *
+from Parser import *
 import io
 from lxml import etree
 import requests
@@ -187,6 +188,8 @@ def main():
         # id_to_url_test()
         # find_book_matches_test()
 
+        parser = Parser(None)
+        parser.__str__()
         print("\n Test(s) were successful \n")
     except Exception as e:
         print("\n Test(s) Failed \n")
