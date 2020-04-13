@@ -104,3 +104,10 @@ class searchAPI(APIView):
         #print(site_book.book_dictionary)
         return site_book
 
+def company_home(request):
+    return render(request, "b2b/company_home.html")
+
+''' Not done yet :)
+def login(request):
+    return render(request, 'regristration/login.html')
+'''

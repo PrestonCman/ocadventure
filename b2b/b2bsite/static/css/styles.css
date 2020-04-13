@@ -165,3 +165,47 @@
 .results_table tr{
     border: 1px solid black;
 }
+
+.company_users {
+    float: left;
+    padding-left: 50px;
+    width: 450px;
+    height: 184px;
+}
+
+.company_user_box {
+    height: 300px;
+    width: 460px;
+    overflow: scroll;
+}
+
+.company_info {
+    float: right;
+    padding-right: 20px;
+}
+
+.company_user_list {
+    white-space: nowrap;
+    display: inline-block;
+    width: 450px;
+    border: 1px solid black;
+}
+
+.company_info_box {
+    float: right;
+    height: 50px;
+    width: 250px;
+    border: 1px solid black;
+
+}
+
+#company_info {
+    text-align: center;
+}
+
+#add_user {
+    background: lightgrey;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
