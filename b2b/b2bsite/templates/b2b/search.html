@@ -1,0 +1,79 @@
+{% extends "base_site.html" %}
+
+{% block content %}
+{% load static %}
+<div class="search_form">
+    <table>
+        <tr>
+            <td>
+                <form action="../search_results" method="GET">
+                    <table>
+                        <tr>
+                            <td>
+                                <p id="search_error" hidden="true" ></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="search_field" id="isbn" type="text" name="isbn_field" placeholder="Enter ISBN-13">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="search_field" id="title" type="text" name="title_field" placeholder="Enter title">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="search_field" id="author" type="text" name="author_field" placeholder="Enter author">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="search_button" type="submit" value="Search">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>For multiple authors, use commas to separate authors:<br>Rowling, Pearson, Tolkien</p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            <td>
+                <form action="../json_search_results" method="GET">
+                    <table>
+                        <tr>
+                            <td>
+                                <p id="json_search_error" hidden="true" ></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea class="json_search_field" id="json_search" name="json_field" placeholder="Enter JSON blob">'format' : None,
+'book_title' : None, 
+'book_image' : None,
+'book_image_url' : None,
+'isbn_13' : None, 
+'description' : None, 
+'series' : None, 
+'volume_number' : None, 
+'subtitle' : None, 
+'authors' : None, 
+'site_slug' : None,
+'url' : None</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="search_button" type="submit" value="JSON Search">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
