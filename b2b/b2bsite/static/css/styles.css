@@ -49,3 +49,37 @@
 .login_form * {
     padding: 5px;
 }
+.search_header{
+    text-align: center;
+}
+
+.search_form{
+    text-align: left;
+    padding-left: 200px;
+    padding-top: 20px;
+    font-family: Helvetica;
+}
+
+.search_field{
+    height: 40px;
+    width: 400px;
+    size: 30px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.json_search_field{
+    height: 204px;
+    width: 400px;
+    size: 30px;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.search_button{
+    height: 40px;
+    width: 414px;
+    size: 30px;
+    padding-left:10px;
+    font-size: 20px;
+}
