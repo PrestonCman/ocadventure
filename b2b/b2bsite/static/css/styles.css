@@ -1,3 +1,7 @@
+.page {
+    margin: 0px;
+}
+
 .b2b {
     font-size: 300%;
 }
@@ -41,26 +45,68 @@
     width: 20%;
 }
 
-.login_form {
-    padding-left: 33%;
+.registration {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 20px;
+    padding-bottom: 15px;
+    font-family: Helvetica;
+}
+
+.login_title {
     padding-bottom: 10px;
+}
+
+.login_title * {
+    font-size: 15px;
+    margin: auto;
+}
+
+.login {
+    font-size: 25px;
+}
+
+.login_form {
+    padding-bottom: 10px;
+    margin: auto;
 }
 
 .login_form * {
     padding: 5px;
 }
-.search_header{
+
+.login_form input {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-size: 125%;
+}
+
+.login_submit {
+    padding: 8px 80px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.forgot_pass {
+    padding-top: 15px;
+    margin: auto;
+}
+
+.search_header {
     text-align: center;
 }
 
-.search_form{
+.search_form {
     text-align: left;
     padding-left: 200px;
     padding-top: 20px;
     font-family: Helvetica;
 }
 
-.search_field{
+.search_field {
     height: 40px;
     width: 400px;
     size: 30px;
@@ -68,7 +114,7 @@
     font-size: 20px;
 }
 
-.json_search_field{
+.json_search_field {
     height: 204px;
     width: 400px;
     size: 30px;
@@ -76,7 +122,7 @@
     font-size: 12px;
 }
 
-.search_button{
+.search_button {
     height: 40px;
     width: 414px;
     size: 30px;
