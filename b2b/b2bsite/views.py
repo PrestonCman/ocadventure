@@ -8,3 +8,11 @@ def home(request):
 @login_required
 def search(request):
     return render(request, 'b2b/search.html')
+
+def do_search(request):
+    return render(request, 'b2b/results.html')
+
+''' Not done yet :)
+def login(request):
+    return render(request, 'regristration/login.html')
+'''

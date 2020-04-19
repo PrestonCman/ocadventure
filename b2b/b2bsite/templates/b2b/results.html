@@ -1,0 +1,57 @@
+{% extends "base_site.html" %}
+
+{% load static %}
+{% if user.is_authenticated %}
+{% block content %}
+<div>
+    <h1 class="search_header">Search Results</h1>
+    {% if book_list %}
+        <table class="results_table">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN-13</th>
+                <th>Rating</th>
+                <th>Site</th>
+            </tr>
+        {% for book in book_list %}
+            <tr onclick="window.open('{{book.url}}','_blank')">
+                <td>{{book.book_title}}</td>
+                <td>{{book.authors}}</td>
+                <td>{{book.isbn_13}}</td>
+                <td>{{book.ranking}}</td>
+                <td>{{book.site}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% block pagination %}
+    {% if is_paginated %}
+    <div class="pagination" style="text-align: center;">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="?q={{query}}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?q={{query}}&page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% else %}
+        <h1>No books found.</h1>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% else %}
+<div>
+    <h1 style="text-align: center;">Please log in.</h1>
+</div>
+{% endif %}
