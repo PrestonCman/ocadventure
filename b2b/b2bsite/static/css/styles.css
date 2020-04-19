@@ -3,7 +3,6 @@
 }
 
 .home {
-    padding: 100px 85px;
     text-align: center;
 }
 
@@ -82,4 +81,23 @@
     size: 30px;
     padding-left:10px;
     font-size: 20px;
+}
+
+.results_table{
+    width: 100%;
+    height: 80%;
+    align-content: left;
+    border-collapse: collapse;
+    background-color: #f6f6f6;
+}
+.results_table th{
+    text-align: left;
+    padding-left: 10px;
+}
+.results_table td{
+    text-align: left;
+    padding-left: 10px;
+}
+.results_table tr{
+    border: 1px solid black;
 }
