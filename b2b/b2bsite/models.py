@@ -36,12 +36,6 @@ class Employee(models.Model):
     email = models.EmailField(unique=True)
     num_queries = models.IntegerField(default=0)
 
-    class Meta:
-        permissions = (
-            ('group_user', 'Can Only Edit Their Information'),
-            ('group_admin', 'Can Edit All Users')
-        )
-
     def __str__(self):
         output = "{} {}, {}, {}"
         return output.format(self.name, self.email, self.company, self.num_queries)
