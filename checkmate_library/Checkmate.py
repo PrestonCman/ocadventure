@@ -321,7 +321,7 @@ class site_book_data():
 
 class book_site():
     def __init__(self, slug):
-        with open("parsers.json") as parserList:
+        with open("/Users/preston/Documents/Programs/teamproject/checkmate_library/parsers.json") as parserList:
             parsers = json.load(parserList)
 
         self.slug = slug
@@ -519,8 +519,19 @@ class book_site():
                             if book_data.book_dictionary[key] in book.book_dictionary[key][0] and ranking <= 0.9:
                                 ranking += 0.1
                         else:
-                            if book_data.book_dictionary[key] in book.book_dictionary[key] and ranking <= 0.9:
-                                ranking += 0.1
+                            # try:
+                            if key != "content":
+                                if book_data.book_dictionary[key] in book.book_dictionary[key] and ranking <= 0.9:
+                                    ranking += 0.1
+                              
+                            # except:
+                            #    print(key)
+                            #    print(book_data.book_dictionary)
+                            #    x = input()
+
+
+                               
+
 
             book_set = [ranking, book]
             ranked_list.append(book_set)
