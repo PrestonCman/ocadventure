@@ -18,6 +18,7 @@ def home(request):
 def search(request):
     return render(request, 'b2b/search.html')
 
+@login_required
 def do_search(request):
     return render(request, 'b2b/results.html')
 
