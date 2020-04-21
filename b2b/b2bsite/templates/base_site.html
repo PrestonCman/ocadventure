@@ -4,15 +4,17 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<div class="header">
-    <img class="D2D" src="{% static 'images/d2d-logo-BlueBG.png'%}" alt="Draft 2 Digital">
-{% if user.is_authenticated %}
-    <form class="base_page_btns" action="{% url 'home' %}" method="GET">
-      <input class="logout_btn" type="image" src="{% static 'images/logout-button.png' %}" formaction="{% url 'logout' %}?next={{request.path}}" alt="Logout">
-      <input class="search_btn" type="image" src="{% static 'images/search-icon.png' %}" formaction="{% url 'home' %}" alt="Search">
-      <input class="home_btn" type="image" src="{% static 'images/home-button.png' %}" alt="Home">
-    </form>
-{% endif %}
-</div>
-<div class="home">{% block content %} {% endblock %}</div>
+<body class="page">
+  <div class="header">
+      <img class="D2D" src="{% static 'images/d2d-logo-BlueBG.png'%}" alt="Draft 2 Digital">
+  {% if user.is_authenticated %}
+      <form class="base_page_btns" action="{% url 'home' %}" method="GET">
+        <input class="logout_btn" type="image" src="{% static 'images/logout-button.png' %}" formaction="{% url 'logout' %}?next={{request.path}}" alt="Logout">
+        <input class="search_btn" type="image" src="{% static 'images/search-icon.png' %}" formaction="{% url 'search' %}" alt="Search">
+        <input class="home_btn" type="image" src="{% static 'images/home-button.png' %}" alt="Home">
+      </form>
+  {% endif %}
+  </div>
+  <div class="home">{% block content %} {% endblock %}</div>
+</body>
 </html>
