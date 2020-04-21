@@ -17,8 +17,8 @@ class Company(models.Model):
     class Meta:
         ordering = ['name']
         permissions = (
-            ('group_user', 'Can Only View Their Company'),
-            ('group_admin', 'Can View All Companies')
+            ('group_user', 'Can Only View Their Company and Edit Their Information'),
+            ('group_admin', 'Can View nd Edit All Companies and Users')
         )
 
     def display_bookstores(self):
@@ -35,6 +35,12 @@ class Employee(models.Model):
     company = models.ForeignKey('Company', on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
     num_queries = models.IntegerField(default=0)
+
+    class Meta:
+        permissions = (
+            ('group_user', 'Can Only Edit Their Information'),
+            ('group_admin', 'Can Edit All Users')
+        )
 
     def __str__(self):
         output = "{} {}, {}, {}"
