@@ -22,6 +22,6 @@ The site scraper functions are all located in Checkmate.py in the site_book_data
 To test Checkmate.py, make sure the test bookstore is running and then cd into /testBookstore/checkmate_library and run the testMate.py file.
 
 Business 2 Business Site:
-  Default Admin Login:
-    Username - admin
-    Password - password
+Default Admin Login:
+Username - admin
+Password - password
