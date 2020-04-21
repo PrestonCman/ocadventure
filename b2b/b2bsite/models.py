@@ -1,8 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+class Bookstore(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
 class Company(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
+    company_email = models.CharField(max_length=60)
+    bookstores = models.ManyToManyField(Bookstore)
+
+    class Meta:
+        ordering = ['name']
+        permissions = (
+            ('group_user', 'Can Only View Their Company and Edit Their Information'),
+            ('group_admin', 'Can View nd Edit All Companies and Users')
+        )
+
+    def display_bookstores(self):
+        return ', '.join(bookstore.name for bookstore in self.bookstores.all())
+
+    display_bookstores.short_description = 'Bookstore'
 
 
     def __str__(self):
@@ -10,18 +31,11 @@ class Company(models.Model):
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
-    num_queries = models.IntegerField()
-    
-    class Meta:
-        ordering = ['last_name']
-
-    def get_name(self):
-        return f'{self.last_name}, {self.first_name}'
+    num_queries = models.IntegerField(default=0)
 
     def __str__(self):
         output = "{} {}, {}, {}"
-        return output.format(self.first_name, self.last_name, self.email, self.company, self.num_queries)
+        return output.format(self.name, self.email, self.company, self.num_queries)

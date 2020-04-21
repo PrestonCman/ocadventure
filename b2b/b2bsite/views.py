@@ -10,7 +10,6 @@ sys.path.append('../checkmate_library/parsers.json')
 
 from Checkmate import *
 
-
 @login_required
 def home(request):
     return render(request, 'b2b/home.html')
@@ -21,11 +20,6 @@ def search(request):
 
 def do_search(request):
     return render(request, 'b2b/results.html')
-
-''' Not done yet :)
-def login(request):
-    return render(request, 'regristration/login.html')
-'''
 
 class searchAPI(APIView):
     def post(self, request):
