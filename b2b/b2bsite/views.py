@@ -11,8 +11,3 @@ def search(request):
 
 def do_search(request):
     return render(request, 'b2b/results.html')
-
-''' Not done yet :)
-def login(request):
-    return render(request, 'regristration/login.html')
-'''
