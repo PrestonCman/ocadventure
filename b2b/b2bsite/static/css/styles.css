@@ -135,6 +135,7 @@
     align-content: left;
     border-collapse: collapse;
     background-color: #f6f6f6;
+    table-layout: fixed;
 }
 .results_table th{
     text-align: left;
@@ -143,6 +144,8 @@
 .results_table td{
     text-align: left;
     padding-left: 10px;
+    width: 20%;
+    word-wrap: break-word;
 }
 .results_table tr{
     border: 1px solid black;

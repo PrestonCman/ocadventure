@@ -7,6 +7,10 @@ from PIL import Image
 import mechanize
 import re
 
+import os
+folder = os.path.dirname(os.path.abspath(__file__))
+os.path.join(folder, 'parsers.json')
+
 class site_book_data():
     def __init__(self,content):
         self.content = content
@@ -321,7 +325,7 @@ class site_book_data():
 
 class book_site():
     def __init__(self, slug):
-        with open("parsers.json") as parserList:
+        with open(os.path.join(folder, 'parsers.json')) as parserList:
             parsers = json.load(parserList)
 
         self.slug = slug

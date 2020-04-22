@@ -2,11 +2,24 @@
 
 {% block content %}
 {% load static %}
+<script>
+    function enableButton(){
+        const btn = document.getElementById('basic_search_button');
+        if(document.getElementById("isbn").value.length > 0 || document.getElementById("title").value.length > 0 || document.getElementById("author").value.length > 0)
+        {
+            btn.disabled = false;
+        }
+        else
+        {
+            btn.disabled = true;
+        }
+    }
+</script>
 <div class="search_form">
     <table>
         <tr>
             <td>
-                <form action="../search_results" method="GET">
+                <form action="{% url 'results' %}" method="GET">
                     <table>
                         <tr>
                             <td>
@@ -15,22 +28,22 @@
                         </tr>
                         <tr>
                             <td>
-                                <input class="search_field" id="isbn" type="text" name="isbn_field" placeholder="Enter ISBN-13">
+                                <input class="search_field" oninput="enableButton()" id="isbn" type="text" name="isbn_field" placeholder="Enter ISBN-13">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input class="search_field" id="title" type="text" name="title_field" placeholder="Enter title">
+                                <input class="search_field" oninput="enableButton()" id="title" type="text" name="title_field" placeholder="Enter title">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input class="search_field" id="author" type="text" name="author_field" placeholder="Enter author">
+                                <input class="search_field" oninput="enableButton()" id="author" type="text" name="author_field" placeholder="Enter author">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input class="search_button" type="submit" value="Search">
+                                <input class="search_button" id="basic_search_button" type="submit" value="Search" disabled="true">
                             </td>
                         </tr>
                         <tr>
