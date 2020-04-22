@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.views import APIView
 from .models import Employee as emp
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 import sys
 sys.path.append('../checkmate_library/')

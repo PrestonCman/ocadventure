@@ -3,6 +3,7 @@
 {% load static %}
 {% if user.is_authenticated %}
 {% block content %}
+{% csrf_token %}
 <div>
     <h1 class="search_header">Search Results</h1>
     {% if book_list %}

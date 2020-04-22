@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+{% csrf_token %}
 <script>
     function enableButton(){
         const btn = document.getElementById('basic_search_button');
