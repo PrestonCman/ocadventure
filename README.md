@@ -85,11 +85,3 @@ To test the Business 2 Business site, cd into b2b and execute the 'python manage
  Default Admin Login for Test Bookstore and Business 2 Business Site:
     Username - admin
     Password - password
-
- Explains how to navigate the repo…what major functionality is located where
-
-    Describes which functionality has unit tests written for it (and where those tests are located)
-
-    How to install/test. You aren’t literally explaining how to install a production environment, but it needs to describe everything necessary to set up a functioning dev environment (just as if a new programmer were coming on your team and they needed to spin up quickly). This includes things like database setup and configuration scripts, what we need to do to set up a virtual environment, etc. 
-    
-    You need to put some time into this and have multiple team members read through it…if it is poorly written and unclear it will significantly impact this portion of your grade.
