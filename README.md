@@ -24,9 +24,9 @@ ROOT DIRECTORY: testBookstore/store
     process onix            views.py             33
     upload onix             views.py            120
 	
-	Test Function			Location		Line of Code
-	----------------------------------------------------
-	upload new onix         tests.py              5
+    Test Function	    Location	    Line of Code
+    ----------------------------------------------------
+    upload new onix         tests.py              5
     
 	
 Checkmate Library
