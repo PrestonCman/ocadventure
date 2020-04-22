@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from rest_framework.views import APIView
-from .models import Employee, Company
+from .models import Employee as emp
 from django.http import HttpResponse
 
 import sys
