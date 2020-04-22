@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from .models import Employee as emp
 from django.http import HttpResponse
@@ -68,16 +69,26 @@ class searchAPI(APIView):
         Given a request searches multiple sites for book matches
         """      
         #this will retrieve the sites for the user
-        request_query = self.request.POST.get("query")
-        query = self.string_to_site_book_data_dictionary(request_query)
-        slugs = ["KB"]
-        for slug in slugs:
-            site = book_site(slug)
-            print(site.find_book_matches_at_site(query))
-        #num_queries = self.request.POST.get("num_queries")+1
-        #num_queries.save()
+        user = authenticate(username=self.request.POST.get("name"), password=self.request.POST.get("pword"))
+        if user is not None:
+            u = User.objects.get(username = user)
+            e = emp.objects.get(user = user)
+            num = e.num_queries
+            num += 1
+            e.num_queries = num
+            e.save()
 
-        return HttpResponse()
+            request_query = self.request.POST.get("query")
+            query = self.string_to_site_book_data_dictionary(request_query)
+
+            #this would normally be a list which is stored in the company model
+            slugs = ["KB"]
+            for slug in slugs:
+                site = book_site(slug)
+                msg = site.find_book_matches_at_site(query)
+        else:
+            msg = "Error invalid user"
+        return HttpResponse(msg)
     
     def string_to_site_book_data_dictionary(self, query):
         """
@@ -101,7 +112,6 @@ class searchAPI(APIView):
     
         book_dict["book_image"] = None
         site_book.book_dictionary = book_dict
-        #print(site_book.book_dictionary)
         return site_book
 
 def company_home(request):

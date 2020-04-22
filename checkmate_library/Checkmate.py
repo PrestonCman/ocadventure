@@ -517,6 +517,13 @@ class book_site():
                                 break
                             else:
                                 ranking += 0.5
+                if key == 'ready_for_sale' and book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
+                    if book.book_dictionary is type(list):
+                        if book_data.book_dictionary[key] is book.book_dictionary[key][0]:
+                            ranking += 1.0
+                    else:
+                        if book_data.book_dictionary[key] is book.book_dictionary[key]:
+                            ranking += 0.1
                 else:
                     if book_data.book_dictionary[key] is not None and book.book_dictionary[key] is not None:
                         if book.book_dictionary is type(list):
