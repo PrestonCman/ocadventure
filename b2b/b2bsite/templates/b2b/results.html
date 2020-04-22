@@ -15,12 +15,12 @@
                 <th>Site</th>
             </tr>
         {% for book in book_list %}
-            <tr onclick="window.open('{{book.url}}','_blank')">
-                <td>{{book.book_title}}</td>
-                <td>{{book.authors}}</td>
-                <td>{{book.isbn_13}}</td>
-                <td>{{book.ranking}}</td>
-                <td>{{book.site}}</td>
+            <tr onclick="window.open('{{book.1.book_dictionary.url}}','_blank')">
+                <td>{{book.1.book_dictionary.book_title}}</td>
+                <td>{{book.1.book_dictionary.authors}}</td>
+                <td>{{book.1.book_dictionary.isbn_13}}</td>
+                <td>{{book.0}}</td>
+                <td>{{book.1.book_dictionary.site}}</td>
             </tr>
         {% endfor %}
         </table>
