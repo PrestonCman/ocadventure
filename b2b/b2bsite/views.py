@@ -105,7 +105,28 @@ class searchAPI(APIView):
         return site_book
 
 def company_home(request):
-    return render(request, "b2b/company_home.html")
+    is_admin_test = False
+    u = request.user.username
+    user = User.objects.get(username = u)
+    if is_admin_test:
+        e = emp.objects.get(user = user)
+        company = e.company
+        employee_list = emp.objects.filter(company=e.company)
+        total_queries = 0
+        for e in employee_list:
+            total_queries += e.num_queries
+    else:
+        e = emp.objects.get(user = user)
+        company = e.company
+        employee_list = emp.objects.filter(company=e.company)
+        total_queries = 0
+        
+        for employee in employee_list:
+            total_queries += employee.num_queries
+    
+    return render(request, "b2b/company_home.html", {"is_admin_test": is_admin_test,
+    "user": user, "employee": e, "company": 
+    company, "employee_list": employee_list, "total_queries": total_queries})
 
 ''' Not done yet :)
 def login(request):

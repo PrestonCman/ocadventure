@@ -3,26 +3,45 @@
 {% block content %}
 {% load static %}
 
-<h1 style="text-align: center">{{ company.company_name }}</h1>
+<h1 style="text-align: center">{{ company.name }}</h1>
+{% if is_admin_test %}
+  <div class="company_users">
+    <h3>Total Queries This Month: {{ total_queries }}</h3>
+    <h3>Edit Users</h3>
+    <div class="company_user_box">
+      {% if employee_list %}
+        {% for user in employee_list %}
+          <span class="company_user_list"><a href="test" style="padding-left: 10px;">{{user.name}}</a><label style="padding-left: 280px;">Number of Queries: {{ user.num_queries }}</label></span>
+        {% endfor %}
+      {% else %}
+        <p class="company_user_list">No Existing Users</p>
+      {% endif %}
+      <a id="add_user" class="company_user_list" href="b2b/company_home/add_user">Add User</a>
+    </div>
+  </div>
 
+  <div class="company_info">
+        <h3 id="company_info">Edit Company Info</h3>
+        <span class="company_info_box"><label style="padding-left: 10px;">Contact Email: {{ company.company_email }}</label><a href="test" style="padding-left: 110px;">edit</a></span>
+  </div>
+{% else %}
 <div class="company_users">
-  <h3>Total Queries This Month: {{ company.total_queries }}</h3>
-  <h3>Edit Users</h3>
+  <h3>Total Queries This Month: {{ total_queries }}</h3>
+  <h3>{{ user.get_username }} : {{ employee.num_queries }}</h3>
   <div class="company_user_box">
-    {% if company.user_list %}
-      {% for user in user_list %}
-        <span class="company_user_list"><a href="test" style="padding-left: 10px;">{{user.user_name}}</a><label style="padding-left: 280px;">Number of Queries: {{ user.number_of_queries }}</label></span>
+    {% if employee_list %}
+      {% for user in employee_list %}
+        <span class="company_user_list"><p style="padding-left: 10px;">{{user.name}}</p><label style="padding-left: 280px;">Number of Queries: {{ user.num_queries }}</label></span>
       {% endfor %}
     {% else %}
       <p class="company_user_list">No Existing Users</p>
     {% endif %}
-    <a id="add_user" class="company_user_list" href="b2b/company_home/add_user">Add User</a>
   </div>
 </div>
 
 <div class="company_info">
       <h3 id="company_info">Edit Company Info</h3>
-      <span class="company_info_box"><label style="padding-left: 10px;">Contact Email: {{ company.contact_email }}</label><a href="test" style="padding-left: 110px;">edit</a></span>
+      <span class="company_info_box"><label style="padding-left: 10px;">Contact Email: {{ company.company_email }}</label></span>
 </div>
-
+{% endif %}
 {% endblock %}
